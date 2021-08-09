@@ -1,24 +1,24 @@
 interface User {
-    name: string,
-    email: string,
-    password: string
+  name: string;
+  email: string;
+  password: string;
 }
 
 export interface AuthenticationState {
-    user?: User,
+  user?: User;
 }
 
 export enum ThemeColor {
-    LIGHT,
-    DARK
+  LIGHT,
+  DARK,
 }
 
 export enum Language {
-    TR,
-    ENG
+  TR,
+  ENG,
 }
 
 export interface ThemeState {
-    mode: ThemeColor,
-    language: Language
+  mode: ThemeColor;
+  language: Language;
 }
