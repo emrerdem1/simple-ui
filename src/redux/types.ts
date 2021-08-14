@@ -5,7 +5,7 @@ interface User {
 }
 
 export interface AuthenticationState {
-  user?: User;
+  user: User | null;
 }
 
 export enum ThemeColor {

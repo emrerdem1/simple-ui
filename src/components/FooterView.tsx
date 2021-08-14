@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const FooterView = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+const FooterView: React.FC = () => {
+  return <div></div>;
+};
 
-export default FooterView
+export default FooterView;

@@ -3,7 +3,7 @@ import ContentView from './components/ContentView';
 import FooterView from './components/FooterView';
 import NavigationView from './components/NavigationView';
 
-const SimpleUI = () => {
+const SimpleUI: React.FC = () => {
   return (
     <>
       <NavigationView />

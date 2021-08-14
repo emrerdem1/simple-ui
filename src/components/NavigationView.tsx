@@ -8,7 +8,7 @@ const NavContainer = styled.div`
   background-color: #2c3e50;
 `;
 
-const NavigationView = () => {
+const NavigationView: React.FC = () => {
   return <NavContainer></NavContainer>;
 };
 
