@@ -1,6 +1,6 @@
 import './SimpleUI.scss';
 import styled from '@emotion/styled';
-import ContentView from './components/ContentView';
+import ContentView from './components/main-content';
 import FooterView from './components/FooterView';
 import NavigationView from './components/navigation/NavigationView';
 
