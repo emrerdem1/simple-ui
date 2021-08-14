@@ -1,8 +1,8 @@
 import './SimpleUI.scss';
 import styled from '@emotion/styled';
-import ContentView from './components/main-content';
 import FooterView from './components/FooterView';
 import NavigationView from './components/navigation/NavigationView';
+import PageRoutes from './components/Routes';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const SimpleUI: React.FC = () => {
   return (
     <LayoutContainer>
       <NavigationView />
-      <ContentView />
+      <PageRoutes />
       <FooterView />
     </LayoutContainer>
   );

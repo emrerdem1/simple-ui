@@ -4,7 +4,7 @@ import AboutView from './main-content/AboutView';
 import ContactView from './main-content/ContactView';
 import HomeView from './main-content/HomeView';
 
-const Routes: React.FC = () => {
+const PageRoutes: React.FC = () => {
   return (
     <Switch>
       <Route path="/about" component={AboutView} />
@@ -14,4 +14,4 @@ const Routes: React.FC = () => {
   );
 };
 
-export default Routes;
+export default PageRoutes;

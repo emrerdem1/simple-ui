@@ -1,24 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { BrowserRouter, NavLink } from 'react-router-dom';
+import LanguageSelectionView from './LanguageSelectionView';
+import LoginView from './LoginView';
+import LinksView from './LinksView';
+import { Divider } from 'antd';
 
 const PreferencesContainer = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 1em;
+  column-gap: 1.5em;
   height: 100%;
 
-  a {
-    position: relative;
-    color: #ecf0f1;
-
-    &.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0px;
-      height: 1px;
-      width: 100%;
+  .ant-divider {
+      height: 30%;
       background-color: #ecf0f1;
     }
   }
@@ -27,13 +21,11 @@ const PreferencesContainer = styled.div`
 const PreferencesView: React.FC = () => {
   return (
     <PreferencesContainer>
-      <BrowserRouter>
-        <NavLink to="/" exact>
-          Home
-        </NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
-      </BrowserRouter>
+      <LinksView />
+      <Divider type="vertical" />
+      <LanguageSelectionView />
+      <Divider type="vertical" />
+      <LoginView />
     </PreferencesContainer>
   );
 };
