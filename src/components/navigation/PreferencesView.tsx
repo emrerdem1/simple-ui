@@ -7,21 +7,32 @@ const PreferencesContainer = styled.div`
   align-items: center;
   column-gap: 1em;
   height: 100%;
+
+  a {
+    position: relative;
+    color: #ecf0f1;
+
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0px;
+      height: 1px;
+      width: 100%;
+      background-color: #ecf0f1;
+    }
+  }
 `;
 
 const PreferencesView: React.FC = () => {
   return (
     <PreferencesContainer>
       <BrowserRouter>
-        <NavLink to="/" className="nav-inactive nav-link">
+        <NavLink to="/" exact>
           Home
         </NavLink>
-        <NavLink to="/about" className="nav-inactive nav-link">
-          About
-        </NavLink>
-        <NavLink to="/contact" className="nav-inactive nav-link">
-          Contact
-        </NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
       </BrowserRouter>
     </PreferencesContainer>
   );
