@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
+import { MOBILE_BREAKPOINT } from '../common/constants';
 
 const LinksContainer = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const LinksContainer = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: ${MOBILE_BREAKPOINT}px) {
     color: black;
     flex-direction: column;
     row-gap: 1em;

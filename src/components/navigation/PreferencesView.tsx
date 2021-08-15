@@ -5,6 +5,7 @@ import LoginView from './LoginView';
 import LinksView from './LinksView';
 import { Divider } from 'antd';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
+import { MOBILE_BREAKPOINT } from '../common/constants';
 
 interface MobileCollapseProps {
   isVisibleOnMobile: boolean;
@@ -27,7 +28,7 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
     background-color: #ecf0f1;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: ${MOBILE_BREAKPOINT}px) {
     display: ${(props) => (!props.isVisibleOnMobile ? 'none' : 'flex')};
     position: absolute;
     right: 0;
@@ -58,13 +59,32 @@ const MobileCollapseItem = styled.div`
   margin-right: 0.5em;
   cursor: pointer;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${MOBILE_BREAKPOINT}px) {
     display: none;
   }
 `;
 
 const PreferencesView: React.FC = () => {
   const [isMobileMenuShown, setIsMobileMenuShown] = React.useState(false);
+
+  /*
+   * Side menu could be left open while changing the orientation
+   * or while testing the responsive look in development stage.
+   * Close it if it is left open to avoid styling conflict of dividers.
+   * Not the cleanest way, you might think to re-arrange it if it causes further problem.
+   */
+  React.useEffect(() => {
+    const updateCollapseByResize = () => {
+      if (window.innerWidth <= MOBILE_BREAKPOINT || !isMobileMenuShown) {
+        return;
+      }
+      setIsMobileMenuShown(false);
+    };
+
+    window.addEventListener('resize', updateCollapseByResize);
+    updateCollapseByResize();
+    return () => window.removeEventListener('resize', updateCollapseByResize);
+  }, [isMobileMenuShown]);
 
   const dividerItem = (
     <Divider type={isMobileMenuShown ? 'horizontal' : 'vertical'} />
