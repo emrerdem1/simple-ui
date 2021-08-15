@@ -8,6 +8,7 @@ import { Language } from '../../redux/types';
 import i18next from 'i18next';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { LanguageIconPaths } from '../common/constants';
+import { useTranslation } from 'react-i18next';
 
 const DropdownContainer = styled.div`
   .ant-dropdown-trigger {
@@ -27,6 +28,7 @@ const DropdownContainer = styled.div`
 const LanguageSelectionView: React.FC = () => {
   const { userLanguage } = useAppSelector(language);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const updateLanguageSelection = ({ key }: MenuInfo) => {
     const selectedLanguage = key as Language;
@@ -41,8 +43,12 @@ const LanguageSelectionView: React.FC = () => {
       defaultSelectedKeys={[Language.EN]}
       onClick={updateLanguageSelection}
     >
-      <Menu.Item key={Language.TR}>Turkish</Menu.Item>
-      <Menu.Item key={Language.EN}>English</Menu.Item>
+      <Menu.Item key={Language.TR}>
+        {t('navigation.languageTexts.tr')}
+      </Menu.Item>
+      <Menu.Item key={Language.EN}>
+        {t('navigation.languageTexts.en')}
+      </Menu.Item>
     </Menu>
   );
 

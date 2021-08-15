@@ -1,3 +1,71 @@
 {
-  "homepage": { "title": "Sade Arayüz'e hoş geldiniz." }
+  "navigation": {
+    "pages": {
+      "home": "Anasayfa",
+      "about": "Hakkımızda",
+      "contact": "İletişim",
+      "titles": {
+        "home": "Yalın Arayüz",
+        "about": "Biz Kimiz?",
+        "contact": "Bize Ulaşın",
+        "notFound": "Sayfa Bulunamadı"
+      }
+    },
+    "languageTexts": { "tr": "Türkçe", "en": "İngilizce" }
+  },
+  "login": {
+    "loginModal": "Giriş Ekranı",
+    "loginInfo": "Şu an gördüğünüz sadece geçici bir giriş ekranıdır. Gerçekten kayıt olmanıza veya bilgilerinizi girmenize gerek yok. Yalnızca istenen alanları doldurmanız yeterlidir.",
+    "editModal": "Profil Bilgilerinizi Düzenleyin",
+    "userName": "Ad/Soyad",
+    "userEmail": "E-posta",
+    "userTitle": "Unvan",
+    "userPassword": "Şifre",
+    "userPhone": "Telefon numarası",
+    "userMessage": "Mesajınız",
+    "userCountry": "Ülkeniz",
+    "placeholders": {
+      "name": "Adınızı girin...",
+      "e-mail": "E-posta adresinizi girin...",
+      "title": "Örnek; öğrenci, stajyer veya mühendis....",
+      "country": "Ülkenizi seçin"
+    },
+    "requiredMessages": {
+      "name": "Lütfen ad/soyad bilgisi girin.",
+      "e-mail": "Lütfen e-postanızı girin.",
+      "invalidMail": "Geçerli bir e-posta girmediniz.",
+      "phone": "Lütfen telefon numaranızı girin.",
+      "message": "Size nasıl yardımcı olabileceğimizi anlatın lütfen.",
+      "country": "Lütfen bir ülke seçin."
+    },
+    "buttons": {
+      "login": "Giriş",
+      "logout": "Çıkış",
+      "save": "Kaydet",
+      "send": "Gönder",
+      "cancel": "İptal"
+    },
+    "messages": {
+      "success": {
+        "login": "Başarıyla giriş yaptınız! Hoş geldiniz!",
+        "update": "Bilgileriniz güncellendi.",
+        "logout": "Çıkış yaptınız. Sizi özleyeceğiz."
+      },
+      "info": "JSON objesini console'dan görebilirsiniz."
+    }
+  },
+  "pagesContent": {
+    "homepage": {
+      "mainTitle": "bla",
+      "mainDescription": "bla",
+      "subtitle": "blabla",
+      "description": "desc"
+    },
+    "about": {
+      "mainTitle": "bla",
+      "mainDescription": "bla",
+      "subtitle": "blabla",
+      "description": "desc"
+    }
+  }
 }

@@ -1,3 +1,71 @@
 {
-  "homepage": { "title": "Welcome to the Simple UI." }
+  "navigation": {
+    "pages": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact",
+      "titles": {
+        "home": "The Simple UI",
+        "about": "About Us",
+        "contact": "Contact Us",
+        "notFound": "Page Not Found"
+      }
+    },
+    "languageTexts": { "tr": "Turkish", "en": "English" }
+  },
+  "login": {
+    "loginModal": "Login Modal",
+    "loginInfo": "This is just a pseudo-login, you do not need to sign-in or give an actual info to login. Please just fill the necessary fields.",
+    "editModal": "Edit Your Profile Information",
+    "userName": "Name",
+    "userEmail": "E-mail",
+    "userTitle": "Title",
+    "userPassword": "Password",
+    "userPhone": "Phone Number",
+    "userMessage": "Your message",
+    "userCountry": "Your country",
+    "placeholders": {
+      "name": "Your name...",
+      "e-mail": "Your e-mail address...",
+      "title": "E.g. student, intern or engineer etc.",
+      "country": "Select your country"
+    },
+    "requiredMessages": {
+      "name": "Please type your name.",
+      "e-mail": "Please input your E-mail!",
+      "invalidMail": "E-mail address is not valid!",
+      "phone": "Please input your phone number!",
+      "message": "Please let us know how can we help you.",
+      "country": "Please select a country."
+    },
+    "buttons": {
+      "login": "Login",
+      "logout": "Logout",
+      "save": "Save",
+      "send": "Send",
+      "cancel": "Cancel"
+    },
+    "messages": {
+      "success": {
+        "login": "Logged in successfully. Welcome!",
+        "update": "Your information is updated.",
+        "logout": "You logged out. We will miss you."
+      },
+      "info": "You can see the JSON in the console."
+    }
+  },
+  "pagesContent": {
+    "homepage": {
+      "mainTitle": "bla",
+      "mainDescription": "bla",
+      "subtitle": "blabla",
+      "description": "desc"
+    },
+    "about": {
+      "mainTitle": "bla",
+      "mainDescription": "bla",
+      "subtitle": "blabla",
+      "description": "desc"
+    }
+  }
 }

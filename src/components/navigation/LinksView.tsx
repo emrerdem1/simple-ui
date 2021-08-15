@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import { MOBILE_BREAKPOINT } from '../common/constants';
+import { useTranslation } from 'react-i18next';
 
 const LinksContainer = styled.div`
   display: flex;
@@ -32,13 +33,14 @@ const LinksContainer = styled.div`
 `;
 
 const LinksView: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <LinksContainer>
       <NavLink to="/" exact>
-        Home
+        {t('navigation.pages.home')}
       </NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/contact">Contact</NavLink>
+      <NavLink to="/about">{t('navigation.pages.about')}</NavLink>
+      <NavLink to="/contact">{t('navigation.pages.contact')}</NavLink>
     </LinksContainer>
   );
 };

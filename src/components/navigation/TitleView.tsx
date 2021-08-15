@@ -9,17 +9,13 @@ import {
 } from '@ant-design/icons';
 import { PageRoutes } from '../common/constants';
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
-
-enum PageTitles {
-  HOME = 'The Simple UI',
-  ABOUT = 'About Us',
-  CONTACT = 'Contact Us',
-  NOT_FOUND = 'Page Not Found',
-}
+import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '../../redux/hooks';
+import { language } from '../../redux/reducer';
 
 interface PageIconAndTitleSpec {
   icon: AntdIconProps;
-  title: PageTitles;
+  title: string;
 }
 
 const TitleContainer = styled.div`
@@ -38,30 +34,44 @@ const NavTitle = styled.span`
   font-size: 1.1em;
 `;
 
-const getPageDetailsByRoute = (routeName: string): PageIconAndTitleSpec => {
-  switch (routeName) {
-    case PageRoutes.HOME:
-      return { icon: <HomeOutlined />, title: PageTitles.HOME };
-    case PageRoutes.ABOUT:
-      return { icon: <InfoCircleOutlined />, title: PageTitles.ABOUT };
-    case PageRoutes.CONTACT:
-      return { icon: <MailOutlined />, title: PageTitles.CONTACT };
-    default:
-      return { icon: <FileUnknownOutlined />, title: PageTitles.NOT_FOUND };
-  }
-};
-
 const TitleView: React.FC = () => {
+  const { userLanguage } = useAppSelector(language);
+  const { t } = useTranslation();
   const [pageIconAndTitle, setPageIconAndTitle] =
     React.useState<PageIconAndTitleSpec>({
       icon: <HomeOutlined />,
-      title: PageTitles.HOME,
+      title: t('navigation.pages.titles.home'),
     });
   const location = useLocation();
 
   React.useEffect(() => {
     setPageIconAndTitle(getPageDetailsByRoute(location.pathname));
-  }, [location]);
+  }, [location, userLanguage]);
+
+  const getPageDetailsByRoute = (routeName: string): PageIconAndTitleSpec => {
+    switch (routeName) {
+      case PageRoutes.HOME:
+        return {
+          icon: <HomeOutlined />,
+          title: t('navigation.pages.titles.home'),
+        };
+      case PageRoutes.ABOUT:
+        return {
+          icon: <InfoCircleOutlined />,
+          title: t('navigation.pages.titles.about'),
+        };
+      case PageRoutes.CONTACT:
+        return {
+          icon: <MailOutlined />,
+          title: t('navigation.pages.titles.contact'),
+        };
+      default:
+        return {
+          icon: <FileUnknownOutlined />,
+          title: t('navigation.pages.titles.notFound'),
+        };
+    }
+  };
 
   return (
     <TitleContainer>

@@ -4,7 +4,8 @@ import { Button, Form, message } from 'antd';
 import { User } from '../../redux/types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editUserInfo, authentication } from '../../redux/reducer';
-import { userFormFields } from './LoginModal';
+import { useTranslation } from 'react-i18next';
+import UserFormFields from './UserFormFields';
 
 interface EditUserInfoModalProps {
   shouldShowEditModal: () => void;
@@ -16,24 +17,25 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
   const { user } = useAppSelector(authentication);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const updateUserInfo = (userInfo: User) => {
     dispatch(editUserInfo(userInfo));
     shouldShowEditModal();
-    message.success('Your information is updated.');
+    message.success(t('login.messages.success.update'));
   };
 
   return (
     <Modal
-      title="Edit Your Profile Information"
+      title={t('login.editModal')}
       visible={true}
       onCancel={shouldShowEditModal}
       footer={[
         <Button key="back" onClick={shouldShowEditModal}>
-          Cancel
+          {t('login.buttons.cancel')}
         </Button>,
         <Button form="editForm" key="submit" htmlType="submit" type="primary">
-          Save
+          {t('login.buttons.save')}
         </Button>,
       ]}
     >
@@ -50,7 +52,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
           password: user?.password,
         }}
       >
-        {userFormFields({ isPasswordIncluded: true })}
+        <UserFormFields isPasswordIncluded={true} />
       </Form>
     </Modal>
   );

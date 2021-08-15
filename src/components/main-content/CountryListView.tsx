@@ -1,6 +1,7 @@
 import { Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { COUNTRY_LIST } from '../common/constants';
 
 const fixAutocomplete = (): void => {
@@ -11,6 +12,7 @@ const fixAutocomplete = (): void => {
 
 const CountryListView: React.FC = () => {
   const [searchInput, setSearchInput] = React.useState<string>('');
+  const { t } = useTranslation();
 
   // Some browsers override Antd inputs' autoComplete="off" option.
   // It makes the search unusable, so use this workaround until Antd finds a solution.
@@ -22,18 +24,18 @@ const CountryListView: React.FC = () => {
   return (
     <FormItem
       name="userCountry"
-      label="Your Country"
+      label={t('login.userCountry')}
       rules={[
         {
           required: true,
-          message: 'Please select a country.',
+          message: t('login.requiredMessages.country'),
         },
       ]}
     >
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder="Select your country"
+        placeholder={t('login.placeholders.country')}
         optionFilterProp="children"
         filterOption={(input, option) =>
           option?.value.toLowerCase().indexOf(input.toLowerCase()) >= 0

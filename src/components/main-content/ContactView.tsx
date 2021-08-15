@@ -4,8 +4,9 @@ import { Button, Form, Input, InputNumber, message } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { authentication } from '../../redux/reducer';
 import { User } from '../../redux/types';
-import { userFormFields } from '../navigation/LoginModal';
 import CountryListView from './CountryListView';
+import UserFormFields from '../navigation/UserFormFields';
+import { useTranslation } from 'react-i18next';
 
 interface ContactFormSpec extends User {
   userCountry: string;
@@ -32,6 +33,7 @@ const ContactContainer = styled.div`
 const ContactView: React.FC = () => {
   const { user } = useAppSelector(authentication);
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     if (!user) {
@@ -43,7 +45,7 @@ const ContactView: React.FC = () => {
 
   const sendContactForm = (formFields: ContactFormSpec) => {
     console.table(formFields);
-    message.info('You can see the JSON in the console.');
+    message.info(t('login.messages.info'));
     form.resetFields();
   };
 
@@ -61,23 +63,23 @@ const ContactView: React.FC = () => {
         }}
         onFinish={sendContactForm}
       >
-        {userFormFields({ isPasswordIncluded: false })}
+        <UserFormFields isPasswordIncluded={false} />
         <Form.Item
           name="userPhone"
-          label="Phone Number"
+          label={t('login.userPhone')}
           rules={[
-            { required: true, message: 'Please input your phone number!' },
+            { required: true, message: t('login.requiredMessages.phone') },
           ]}
         >
           <InputNumber style={{ width: '100%' }} maxLength={15} />
         </Form.Item>
         <Form.Item
           name="userMessage"
-          label="Your Message"
+          label={t('login.userMessage')}
           rules={[
             {
               required: true,
-              message: 'Please let us know how can we help you.',
+              message: t('login.requiredMessages.message'),
             },
           ]}
         >
@@ -92,7 +94,7 @@ const ContactView: React.FC = () => {
             size="large"
             block
           >
-            Send
+            {t('login.buttons.send')}
           </Button>
         </Form.Item>
       </Form>

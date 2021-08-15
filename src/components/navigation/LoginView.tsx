@@ -6,6 +6,7 @@ import LoginModal from './LoginModal';
 import { Dropdown, Menu, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EditUserInfoModal from './EditUserInfoModal';
+import { useTranslation } from 'react-i18next';
 
 const LoggedInUserContainer = styled.div`
   color: white;
@@ -22,10 +23,11 @@ const LoginView: React.FC = () => {
     React.useState<boolean>(false);
   const { user } = useAppSelector(authentication);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const logoutUser = (): void => {
     dispatch(logout());
-    message.success('You logged out. We will miss you.');
+    message.success(t('login.messages.success.logout'));
   };
 
   const loggedInUserMenu = (
@@ -34,7 +36,7 @@ const LoginView: React.FC = () => {
         {user && user.email}
       </Menu.Item>
       <Menu.Item key="2" style={{ textAlign: 'center' }} onClick={logoutUser}>
-        Logout
+        {t('login.buttons.logout')}
       </Menu.Item>
     </Menu>
   );
