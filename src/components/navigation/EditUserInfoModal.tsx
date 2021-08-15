@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'antd/lib/modal/Modal';
-import { Button, Form } from 'antd';
+import { Button, Form, message } from 'antd';
 import { User } from '../../redux/types';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editUserInfo, authentication } from '../../redux/reducer';
@@ -20,6 +20,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
   const updateUserInfo = (userInfo: User) => {
     dispatch(editUserInfo(userInfo));
     shouldShowEditModal();
+    message.success('Your information is updated.');
   };
 
   return (

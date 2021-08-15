@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authentication, logout } from '../../redux/reducer';
 import LoginModal from './LoginModal';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EditUserInfoModal from './EditUserInfoModal';
 
@@ -25,6 +25,7 @@ const LoginView: React.FC = () => {
 
   const logoutUser = (): void => {
     dispatch(logout());
+    message.success('You logged out. We will miss you.');
   };
 
   const loggedInUserMenu = (

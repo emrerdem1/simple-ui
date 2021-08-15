@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Form, Input } from 'antd';
 import { User } from '../../redux/types';
@@ -70,6 +70,7 @@ const LoginModal: React.FC = () => {
 
   const handleLogin = (userInfo: User) => {
     dispatch(login(userInfo));
+    message.success('Logged in successfully. Welcome!');
   };
 
   return (

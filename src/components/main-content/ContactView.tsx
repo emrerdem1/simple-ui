@@ -1,9 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber, message } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { authentication } from '../../redux/reducer';
+import { User } from '../../redux/types';
 import { userFormFields } from '../navigation/LoginModal';
+import CountryListView from './CountryListView';
+
+interface ContactFormSpec extends User {
+  userCountry: string;
+  userPhone: number;
+}
 
 const ContactContainer = styled.div`
   display: flex;
@@ -18,10 +25,6 @@ const ContactContainer = styled.div`
     #userMessage {
       min-height: 80px;
       max-height: 140px;
-    }
-
-    #sendButton {
-      margin-top: 0.5em;
     }
   }
 `;
@@ -38,6 +41,12 @@ const ContactView: React.FC = () => {
     form.setFieldsValue(user);
   }, [user]);
 
+  const sendContactForm = (formFields: ContactFormSpec) => {
+    console.table(formFields);
+    message.info('You can see the JSON in the console.');
+    form.resetFields();
+  };
+
   return (
     <ContactContainer>
       <Form
@@ -50,16 +59,17 @@ const ContactView: React.FC = () => {
           email: user?.email,
           title: user?.title,
         }}
+        onFinish={sendContactForm}
       >
         {userFormFields({ isPasswordIncluded: false })}
         <Form.Item
-          name="phone"
+          name="userPhone"
           label="Phone Number"
           rules={[
             { required: true, message: 'Please input your phone number!' },
           ]}
         >
-          <InputNumber style={{ width: '100%' }} />
+          <InputNumber style={{ width: '100%' }} maxLength={15} />
         </Form.Item>
         <Form.Item
           name="userMessage"
@@ -71,9 +81,10 @@ const ContactView: React.FC = () => {
             },
           ]}
         >
-          <Input.TextArea />
+          <Input.TextArea maxLength={600} />
         </Form.Item>
-        <Form.Item name="sendButton">
+        <CountryListView />
+        <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
