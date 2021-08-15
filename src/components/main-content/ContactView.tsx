@@ -20,7 +20,7 @@ const ContactContainer = styled.div`
 
   #contactForm {
     width: 80%;
-    max-width: 900px;
+    max-width: 800px;
 
     #userMessage {
       min-height: 80px;
