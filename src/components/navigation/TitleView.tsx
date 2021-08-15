@@ -7,7 +7,7 @@ import {
   InfoCircleOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import { Pages } from '../common/constants';
+import { PageRoutes } from '../common/constants';
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 
 enum PageTitles {
@@ -40,11 +40,11 @@ const NavTitle = styled.span`
 
 const getPageDetailsByRoute = (routeName: string): PageIconAndTitleSpec => {
   switch (routeName) {
-    case Pages.HOME:
+    case PageRoutes.HOME:
       return { icon: <HomeOutlined />, title: PageTitles.HOME };
-    case Pages.ABOUT:
+    case PageRoutes.ABOUT:
       return { icon: <InfoCircleOutlined />, title: PageTitles.ABOUT };
-    case Pages.CONTACT:
+    case PageRoutes.CONTACT:
       return { icon: <MailOutlined />, title: PageTitles.CONTACT };
     default:
       return { icon: <FileUnknownOutlined />, title: PageTitles.NOT_FOUND };

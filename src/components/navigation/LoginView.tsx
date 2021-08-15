@@ -28,7 +28,7 @@ const LoginView: React.FC = () => {
         forceRender
       >
         <TipsText>
-          This is just a psuedo-login, you do not need to sign-in or give an
+          This is just a pseudo-login, you do not need to sign-in or give an
           actual info to login. Please just fill the necessary fields.
         </TipsText>
 

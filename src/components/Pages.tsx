@@ -1,16 +1,16 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { Pages } from './common/constants';
+import { PageRoutes } from './common/constants';
 import AboutView from './main-content/AboutView';
 import ContactView from './main-content/ContactView';
 import HomeView from './main-content/HomeView';
 
-const PageRoutes: React.FC = () => {
+const Pages: React.FC = () => {
   return (
     <Switch>
-      <Route path={Pages.ABOUT} component={AboutView} />
-      <Route path={Pages.CONTACT} component={ContactView} />
-      <Route exact path={Pages.HOME} component={HomeView} />
+      <Route path={PageRoutes.ABOUT} component={AboutView} />
+      <Route path={PageRoutes.CONTACT} component={ContactView} />
+      <Route exact path={PageRoutes.HOME} component={HomeView} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
@@ -18,4 +18,4 @@ const PageRoutes: React.FC = () => {
   );
 };
 
-export default PageRoutes;
+export default Pages;
