@@ -3,6 +3,11 @@ import Modal from 'antd/lib/modal/Modal';
 import React, { useState } from 'react';
 import { Form, Input } from 'antd';
 import { User } from '../../redux/types';
+import styled from '@emotion/styled';
+
+const TipsText = styled.p`
+  color: #7d7a7a;
+`;
 
 const LoginView: React.FC = () => {
   const [isModalShown, setIsModalShown] = useState<boolean>(false);
@@ -22,10 +27,10 @@ const LoginView: React.FC = () => {
         footer={null}
         forceRender
       >
-        <p>
+        <TipsText>
           This is just a psuedo-login, you do not need to sign-in or give an
           actual info to login. Please just fill the necessary fields.
-        </p>
+        </TipsText>
 
         <Form
           form={form}
@@ -53,7 +58,7 @@ const LoginView: React.FC = () => {
             rules={[
               {
                 type: 'email',
-                message: 'The input is not valid E-mail!',
+                message: 'E-mail address is not valid!',
               },
               {
                 required: true,
