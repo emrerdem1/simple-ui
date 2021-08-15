@@ -1,7 +1,5 @@
 # The Simple UI App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Live Demo
 
 [The Simple UI](https://the-simple-ui.netlify.app/)
