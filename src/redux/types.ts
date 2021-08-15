@@ -1,7 +1,8 @@
-interface User {
-  name: string;
+export interface User {
+  userName: string;
   email: string;
-  password: string;
+  title?: string;
+  password?: string;
 }
 
 export interface AuthenticationState {

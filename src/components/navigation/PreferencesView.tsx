@@ -65,7 +65,8 @@ const MobileCollapseItem = styled.div`
 `;
 
 const PreferencesView: React.FC = () => {
-  const [isMobileMenuShown, setIsMobileMenuShown] = React.useState(false);
+  const [isMobileMenuShown, setIsMobileMenuShown] =
+    React.useState<boolean>(false);
 
   /*
    * Side menu could be left open while changing the orientation
