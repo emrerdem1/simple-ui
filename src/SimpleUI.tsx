@@ -2,7 +2,7 @@ import './SimpleUI.scss';
 import styled from '@emotion/styled';
 import FooterView from './components/FooterView';
 import NavigationView from './components/navigation/NavigationView';
-import PageRoutes from './components/Routes';
+import PageRoutes from './components/PageRoutes';
 
 const LayoutContainer = styled.div`
   display: flex;

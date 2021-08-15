@@ -7,6 +7,7 @@ const TitleContainer = styled.div`
   align-items: center;
   column-gap: 1em;
   color: #ecf0f1;
+  padding-left: 1.4em;
 
   .anticon {
     font-size: 1.6em;

@@ -5,7 +5,7 @@ import { DownOutlined } from '@ant-design/icons';
 
 const DropdownContainer = styled.div`
   .ant-dropdown-trigger {
-    width: 44px;
+    width: 3em;
     display: flex;
     align-items: center;
     justify-content: center;

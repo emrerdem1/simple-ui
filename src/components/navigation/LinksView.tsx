@@ -13,12 +13,21 @@ const LinksContainer = styled.div`
     &.active::after {
       content: '';
       position: absolute;
-      bottom: -4px;
+      bottom: -0.4em;
       left: 0px;
       height: 1px;
       width: 100%;
       background-color: #ecf0f1;
     }
+  }
+
+  @media only screen and (max-width: 768px) {
+    color: black;
+    flex-direction: column;
+    row-gap: 1em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
 `;
 
 const LinksView: React.FC = () => {

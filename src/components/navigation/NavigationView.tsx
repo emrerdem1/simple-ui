@@ -9,7 +9,6 @@ const NavContainer = styled.div`
   align-items: center;
   height: 80px;
   background-color: #2c3e50;
-  padding: 0 1.4em;
 `;
 
 const NavigationView: React.FC = () => {
