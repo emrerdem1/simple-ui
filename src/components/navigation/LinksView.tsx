@@ -15,7 +15,7 @@ const LinksContainer = styled.div`
     &.active::after {
       content: '';
       position: absolute;
-      bottom: -0.4em;
+      bottom: -0.6em;
       left: 0px;
       height: 1px;
       width: 100%;

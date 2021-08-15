@@ -7,10 +7,20 @@ import { User } from '../../redux/types';
 import CountryListView from './CountryListView';
 import UserFormFields from '../navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
+import { language } from '../../redux/reducer';
 
 interface ContactFormSpec extends User {
   userCountry: string;
   userPhone: number;
+}
+
+interface CountryItemSpec {
+  id: string;
+  name: string;
+}
+
+export interface CountryListSpec {
+  countries: CountryItemSpec[];
 }
 
 const ContactContainer = styled.div`
@@ -35,6 +45,7 @@ const ContactView: React.FC = () => {
   const { user } = useAppSelector(authentication);
   const [form] = Form.useForm();
   const { t } = useTranslation();
+  const { userLanguage } = useAppSelector(language);
 
   React.useEffect(() => {
     if (!user) {
@@ -43,6 +54,33 @@ const ContactView: React.FC = () => {
     }
     form.setFieldsValue(user);
   }, [user]);
+
+  // In case user changed the language after selecting one of the countries,
+  // we should check the ID and update the corresponding country name.
+  React.useEffect(() => {
+    const activeCountrySelection = form.getFieldsValue().userCountry;
+    if (!activeCountrySelection) {
+      return;
+    }
+    form.setFieldsValue({
+      userCountry: COUNTRY_LIST.find(
+        (country) => country.id === activeCountrySelection,
+      )?.id,
+    });
+  }, [userLanguage]);
+
+  // TODO(emrerdem1): You should find a proper way to use i18 outside the components.
+  // A kind of static list should not be defined within the component.
+  const COUNTRY_LIST: CountryItemSpec[] = [
+    { id: 'TR', name: t('countryList.tr') },
+    { id: 'US', name: t('countryList.us') },
+    { id: 'GB', name: t('countryList.gb') },
+    { id: 'DE', name: t('countryList.de') },
+    { id: 'SE', name: t('countryList.se') },
+    { id: 'KE', name: t('countryList.ke') },
+    { id: 'BR', name: t('countryList.br') },
+    { id: 'ZW', name: t('countryList.zw') },
+  ];
 
   const sendContactForm = (formFields: ContactFormSpec) => {
     console.table(formFields);
@@ -86,7 +124,7 @@ const ContactView: React.FC = () => {
         >
           <Input.TextArea maxLength={600} />
         </Form.Item>
-        <CountryListView />
+        <CountryListView countries={COUNTRY_LIST} />
         <Form.Item>
           <Button
             type="primary"

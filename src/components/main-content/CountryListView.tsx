@@ -2,39 +2,26 @@ import { Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { CountryListSpec } from './ContactView';
 
-interface CountryListSpec {
-  id: string;
-  name: string;
-}
-
+/*
+ * Some browsers override Antd inputs' autoComplete="off" option.
+ * It makes the search unusable, so use this workaround until Antd finds a solution.
+ * Reference: https://github.com/ant-design/ant-design/issues/7659#issuecomment-580688874
+ */
 const fixAutocomplete = (): void => {
   document.querySelectorAll('.ant-select-selector input').forEach((e) => {
     e.setAttribute('autocomplete', 'stopAutocomplete');
   });
 };
 
-const CountryListView: React.FC = () => {
+const CountryListView: React.FC<CountryListSpec> = (props) => {
   const [searchInput, setSearchInput] = React.useState<string>('');
   const { t } = useTranslation();
 
-  // Some browsers override Antd inputs' autoComplete="off" option.
-  // It makes the search unusable, so use this workaround until Antd finds a solution.
-  // Reference: https://github.com/ant-design/ant-design/issues/7659#issuecomment-580688874
   React.useEffect(() => {
     fixAutocomplete();
   }, [searchInput]);
-
-  const COUNTRY_LIST: CountryListSpec[] = [
-    { id: 'TR', name: t('countryList.tr') },
-    { id: 'US', name: t('countryList.us') },
-    { id: 'GB', name: t('countryList.gb') },
-    { id: 'DE', name: t('countryList.de') },
-    { id: 'SE', name: t('countryList.se') },
-    { id: 'KE', name: t('countryList.ke') },
-    { id: 'BR', name: t('countryList.br') },
-    { id: 'ZW', name: t('countryList.zw') },
-  ];
 
   return (
     <FormItem
@@ -58,8 +45,8 @@ const CountryListView: React.FC = () => {
         onSearch={(value) => setSearchInput(value)}
         onFocus={fixAutocomplete}
       >
-        {COUNTRY_LIST.map((country) => (
-          <Select.Option key={country.id} value={country.name}>
+        {props.countries.map((country) => (
+          <Select.Option key={country.id} value={country.id}>
             {country.name}
           </Select.Option>
         ))}
