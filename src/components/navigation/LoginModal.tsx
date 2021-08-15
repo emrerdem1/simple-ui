@@ -7,6 +7,48 @@ import styled from '@emotion/styled';
 import { useAppDispatch } from '../../redux/hooks';
 import { login } from '../../redux/reducer';
 
+// Both login and edit user info modals use the same fields.
+export const userFormFields = (
+  <>
+    <Form.Item
+      label="Name"
+      name="userName"
+      required
+      rules={[
+        {
+          required: true,
+          message: 'Please type your name!',
+        },
+      ]}
+    >
+      <Input placeholder="Your name..." />
+    </Form.Item>
+    <Form.Item
+      label="E-mail"
+      name="email"
+      required
+      rules={[
+        {
+          type: 'email',
+          message: 'E-mail address is not valid!',
+        },
+        {
+          required: true,
+          message: 'Please input your E-mail!',
+        },
+      ]}
+    >
+      <Input placeholder="Your e-mail address..." />
+    </Form.Item>
+    <Form.Item label="Title" name="title">
+      <Input placeholder="E.g., student, intern, engineer etc." />
+    </Form.Item>
+    <Form.Item label="Password" name="password">
+      <Input.Password placeholder="Your password..." />
+    </Form.Item>
+  </>
+);
+
 const TipsText = styled.p`
   color: #7d7a7a;
 `;
@@ -17,8 +59,10 @@ const LoginModal: React.FC = () => {
   const [form] = Form.useForm();
 
   const handleLogin = (userInfo: User) => {
+    console.log(userInfo);
     dispatch(login(userInfo));
   };
+
   return (
     <>
       <Button onClick={() => setIsModalShown(true)}>Login</Button>
@@ -40,42 +84,7 @@ const LoginModal: React.FC = () => {
           requiredMark={true}
           onFinish={handleLogin}
         >
-          <Form.Item
-            label="Name"
-            name="userName"
-            required
-            rules={[
-              {
-                required: true,
-                message: 'Please type your name!',
-              },
-            ]}
-          >
-            <Input placeholder="Your name..." />
-          </Form.Item>
-          <Form.Item
-            label="E-mail"
-            name="email"
-            required
-            rules={[
-              {
-                type: 'email',
-                message: 'E-mail address is not valid!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input placeholder="Your e-mail address..." />
-          </Form.Item>
-          <Form.Item label="Title" name="title">
-            <Input placeholder="E.g., student, intern, engineer etc." />
-          </Form.Item>
-          <Form.Item label="Password" name="password">
-            <Input.Password placeholder="Your password..." />
-          </Form.Item>
+          {userFormFields}
           <Form.Item>
             <Button
               type="primary"

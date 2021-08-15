@@ -23,7 +23,7 @@ const LoginView: React.FC = () => {
   const { user } = useAppSelector(authentication);
   const dispatch = useAppDispatch();
 
-  const logoutUser = () => {
+  const logoutUser = (): void => {
     dispatch(logout());
   };
 
@@ -56,7 +56,7 @@ const LoginView: React.FC = () => {
       )}
       {shouldOpenEditModal && (
         <EditUserInfoModal
-          setShouldShowEditModal={() => setShouldOpenEditModal(true)}
+          shouldShowEditModal={() => setShouldOpenEditModal(false)}
         />
       )}
     </React.Fragment>

@@ -23,6 +23,10 @@ const loginSlice = createSlice({
     logout: () => {
       return initialStateLogin;
     },
+    editUserInfo: (state: AuthenticationState, action: PayloadAction<User>) => {
+      state = { ...initialStateLogin, user: action.payload };
+      return state;
+    },
   },
 });
 
@@ -38,7 +42,7 @@ const themeSlice = createSlice({
 });
 
 export const { actions: loginActions, reducer: loginReducer } = loginSlice;
-export const { login, logout } = loginActions;
+export const { login, logout, editUserInfo } = loginActions;
 export const authentication = (state: RootState): AuthenticationState =>
   state.loginSlice;
 

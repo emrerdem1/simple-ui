@@ -1,69 +1,55 @@
 import React from 'react';
-import { Button } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
-import { Form, Input } from 'antd';
+import { Button, Form } from 'antd';
 import { User } from '../../redux/types';
-import styled from '@emotion/styled';
-import { useAppDispatch } from '../../redux/hooks';
-import { login } from '../../redux/reducer';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { editUserInfo, authentication } from '../../redux/reducer';
+import { userFormFields } from './LoginModal';
 
 interface EditUserInfoModalProps {
-  setShouldShowEditModal: () => void;
+  shouldShowEditModal: () => void;
 }
 
 const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
-  setShouldShowEditModal,
-}) => {
+  shouldShowEditModal,
+}: EditUserInfoModalProps) => {
+  const { user } = useAppSelector(authentication);
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
   const updateUserInfo = (userInfo: User) => {
-    dispatch(login(userInfo));
+    dispatch(editUserInfo(userInfo));
+    shouldShowEditModal();
   };
+
   return (
     <Modal
-      title="Login Modal"
+      title="Edit Your Profile Information"
       visible={true}
-      onCancel={setShouldShowEditModal}
-      forceRender
+      onCancel={shouldShowEditModal}
+      footer={[
+        <Button key="back" onClick={shouldShowEditModal}>
+          Cancel
+        </Button>,
+        <Button form="edit-form" key="submit" htmlType="submit" type="primary">
+          Save
+        </Button>,
+      ]}
     >
-      <Form form={form} layout="vertical" requiredMark={true}>
-        <Form.Item
-          label="Name"
-          name="userName"
-          required
-          rules={[
-            {
-              required: true,
-              message: 'Please type your name!',
-            },
-          ]}
-        >
-          <Input placeholder="Your name..." />
-        </Form.Item>
-        <Form.Item
-          label="E-mail"
-          name="email"
-          required
-          rules={[
-            {
-              type: 'email',
-              message: 'E-mail address is not valid!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input placeholder="Your e-mail address..." />
-        </Form.Item>
-        <Form.Item label="Title" name="title">
-          <Input placeholder="E.g., student, intern, engineer etc." />
-        </Form.Item>
-        <Form.Item label="Password" name="password">
-          <Input.Password placeholder="Your password..." />
-        </Form.Item>
+      <Form
+        form={form}
+        layout="vertical"
+        requiredMark={true}
+        id="edit-form"
+        onFinish={updateUserInfo}
+        initialValues={{
+          userName: user?.userName,
+          email: user?.email,
+          title: user?.title,
+          password: user?.password,
+        }}
+      >
+        {userFormFields}
       </Form>
     </Modal>
   );
