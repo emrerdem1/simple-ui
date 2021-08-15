@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { authentication } from '../../redux/reducer';
 import { userFormFields } from '../navigation/LoginModal';
@@ -19,6 +19,10 @@ const ContactContainer = styled.div`
       min-height: 80px;
       max-height: 140px;
     }
+
+    #sendButton {
+      margin-top: 0.5em;
+    }
   }
 `;
 
@@ -27,6 +31,10 @@ const ContactView: React.FC = () => {
   const [form] = Form.useForm();
 
   React.useEffect(() => {
+    if (!user) {
+      form.resetFields();
+      return;
+    }
     form.setFieldsValue(user);
   }, [user]);
 
@@ -64,6 +72,17 @@ const ContactView: React.FC = () => {
           ]}
         >
           <Input.TextArea />
+        </Form.Item>
+        <Form.Item name="sendButton">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            size="large"
+            block
+          >
+            Send
+          </Button>
         </Form.Item>
       </Form>
     </ContactContainer>

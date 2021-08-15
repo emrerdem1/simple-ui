@@ -46,7 +46,7 @@ export const userFormFields = ({
         },
       ]}
     >
-      <Input placeholder="Your e-mail address..." />
+      <Input placeholder="Your e-mail address..." maxLength={30} />
     </Form.Item>
     <Form.Item label="Title" name="title">
       <Input placeholder="E.g., student, intern, engineer etc." />

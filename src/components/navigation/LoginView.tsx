@@ -38,22 +38,25 @@ const LoginView: React.FC = () => {
     </Menu>
   );
 
+  let loginItem = <LoginModal />;
+  if (user) {
+    loginItem = (
+      <LoggedInUserContainer>
+        <Dropdown.Button
+          overlay={loggedInUserMenu}
+          placement="bottomLeft"
+          icon={<UserOutlined />}
+          onClick={() => setShouldOpenEditModal(true)}
+        >
+          <UserNameSpan>{user.userName}</UserNameSpan>
+        </Dropdown.Button>
+      </LoggedInUserContainer>
+    );
+  }
+
   return (
     <React.Fragment>
-      {user ? (
-        <LoggedInUserContainer>
-          <Dropdown.Button
-            overlay={loggedInUserMenu}
-            placement="bottomLeft"
-            icon={<UserOutlined />}
-            onClick={() => setShouldOpenEditModal(true)}
-          >
-            <UserNameSpan>{user.userName}</UserNameSpan>
-          </Dropdown.Button>
-        </LoggedInUserContainer>
-      ) : (
-        <LoginModal />
-      )}
+      {loginItem}
       {shouldOpenEditModal && (
         <EditUserInfoModal
           shouldShowEditModal={() => setShouldOpenEditModal(false)}
