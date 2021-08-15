@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { BasicContainer } from './HomeView';
+import { BasicContainer, MainHeader, DescriptionParagraph } from './HomeView';
 import styled from '@emotion/styled';
 
 const SIMPLICITIY_IMAGE =
@@ -18,8 +18,10 @@ const AboutView: React.FC = () => {
 
   return (
     <AboutContainer>
-      <h2>{t('pagesContent.about.mainTitle')}</h2>
-      <p>{t('pagesContent.about.mainDescription')}</p>
+      <MainHeader>{t('pagesContent.about.mainTitle')}</MainHeader>
+      <DescriptionParagraph>
+        {t('pagesContent.about.mainDescription')}
+      </DescriptionParagraph>
       <img src={SIMPLICITIY_IMAGE} alt="simplicity image" />
     </AboutContainer>
   );
