@@ -31,6 +31,7 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
   @media only screen and (max-width: ${MOBILE_BREAKPOINT}px) {
     display: ${(props) => (!props.isVisibleOnMobile ? 'none' : 'flex')};
     position: absolute;
+    z-index: 1;
     right: 0;
     top: 0;
     height: 100vh;
@@ -49,7 +50,7 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
 
 const MobileCollapseItem = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   right: 0;
   top: 50%;
   transform: translateY(-50%);

@@ -29,10 +29,10 @@ const LoginView: React.FC = () => {
 
   const loggedInUserMenu = (
     <Menu>
-      <Menu.Item style={{ pointerEvents: 'none' }}>
+      <Menu.Item key="1" style={{ pointerEvents: 'none' }}>
         {user && user.email}
       </Menu.Item>
-      <Menu.Item key="1" style={{ textAlign: 'center' }} onClick={logoutUser}>
+      <Menu.Item key="2" style={{ textAlign: 'center' }} onClick={logoutUser}>
         Logout
       </Menu.Item>
     </Menu>

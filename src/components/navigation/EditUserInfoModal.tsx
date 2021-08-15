@@ -31,7 +31,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
         <Button key="back" onClick={shouldShowEditModal}>
           Cancel
         </Button>,
-        <Button form="edit-form" key="submit" htmlType="submit" type="primary">
+        <Button form="editForm" key="submit" htmlType="submit" type="primary">
           Save
         </Button>,
       ]}
@@ -40,7 +40,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
         form={form}
         layout="vertical"
         requiredMark={true}
-        id="edit-form"
+        id="editForm"
         onFinish={updateUserInfo}
         initialValues={{
           userName: user?.userName,
@@ -49,7 +49,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
           password: user?.password,
         }}
       >
-        {userFormFields}
+        {userFormFields({ isPasswordIncluded: true })}
       </Form>
     </Modal>
   );

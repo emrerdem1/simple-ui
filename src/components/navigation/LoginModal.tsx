@@ -7,8 +7,16 @@ import styled from '@emotion/styled';
 import { useAppDispatch } from '../../redux/hooks';
 import { login } from '../../redux/reducer';
 
+// Password field does not exist in same usages,
+// use a param to decide whether include it or not.
+interface UserFormFieldsProps {
+  isPasswordIncluded: boolean;
+}
+
 // Both login and edit user info modals use the same fields.
-export const userFormFields = (
+export const userFormFields = ({
+  isPasswordIncluded,
+}: UserFormFieldsProps): JSX.Element => (
   <>
     <Form.Item
       label="Name"
@@ -43,9 +51,11 @@ export const userFormFields = (
     <Form.Item label="Title" name="title">
       <Input placeholder="E.g., student, intern, engineer etc." />
     </Form.Item>
-    <Form.Item label="Password" name="password">
-      <Input.Password placeholder="Your password..." />
-    </Form.Item>
+    {isPasswordIncluded && (
+      <Form.Item label="Password" name="password">
+        <Input.Password placeholder="Your password..." />
+      </Form.Item>
+    )}
   </>
 );
 
@@ -59,7 +69,6 @@ const LoginModal: React.FC = () => {
   const [form] = Form.useForm();
 
   const handleLogin = (userInfo: User) => {
-    console.log(userInfo);
     dispatch(login(userInfo));
   };
 
@@ -84,7 +93,7 @@ const LoginModal: React.FC = () => {
           requiredMark={true}
           onFinish={handleLogin}
         >
-          {userFormFields}
+          {userFormFields({ isPasswordIncluded: true })}
           <Form.Item>
             <Button
               type="primary"
