@@ -1,91 +1,65 @@
-import { Button } from 'antd';
-import Modal from 'antd/lib/modal/Modal';
-import React, { useState } from 'react';
-import { Form, Input } from 'antd';
-import { User } from '../../redux/types';
+import React from 'react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { authentication, logout } from '../../redux/reducer';
+import LoginModal from './LoginModal';
+import { Dropdown, Menu } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import EditUserInfoModal from './EditUserInfoModal';
 
-const TipsText = styled.p`
-  color: #7d7a7a;
+const LoggedInUserContainer = styled.div`
+  color: white;
+`;
+
+const UserNameSpan = styled.span`
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const LoginView: React.FC = () => {
-  const [isModalShown, setIsModalShown] = useState<boolean>(false);
-  const [form] = Form.useForm();
+  const [shouldOpenEditModal, setShouldOpenEditModal] =
+    React.useState<boolean>(false);
+  const { user } = useAppSelector(authentication);
+  const dispatch = useAppDispatch();
 
-  const handleLogin = (values: User) => {
-    console.log('Received values of form: ', values);
+  const logoutUser = () => {
+    dispatch(logout());
   };
 
-  return (
-    <>
-      <Button onClick={() => setIsModalShown(true)}>Login</Button>
-      <Modal
-        title="Login Modal"
-        visible={isModalShown}
-        onCancel={() => setIsModalShown(false)}
-        footer={null}
-        forceRender
-      >
-        <TipsText>
-          This is just a pseudo-login, you do not need to sign-in or give an
-          actual info to login. Please just fill the necessary fields.
-        </TipsText>
+  const loggedInUserMenu = (
+    <Menu>
+      <Menu.Item style={{ pointerEvents: 'none' }}>
+        {user && user.email}
+      </Menu.Item>
+      <Menu.Item key="1" style={{ textAlign: 'center' }} onClick={logoutUser}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
 
-        <Form
-          form={form}
-          layout="vertical"
-          requiredMark={true}
-          onFinish={handleLogin}
-        >
-          <Form.Item
-            label="Name"
-            name="userName"
-            required
-            rules={[
-              {
-                required: true,
-                message: 'Please type your name!',
-              },
-            ]}
+  return (
+    <React.Fragment>
+      {user ? (
+        <LoggedInUserContainer>
+          <Dropdown.Button
+            overlay={loggedInUserMenu}
+            placement="bottomLeft"
+            icon={<UserOutlined />}
+            onClick={() => setShouldOpenEditModal(true)}
           >
-            <Input placeholder="Your name..." />
-          </Form.Item>
-          <Form.Item
-            label="E-mail"
-            name="email"
-            required
-            rules={[
-              {
-                type: 'email',
-                message: 'E-mail address is not valid!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input placeholder="Your e-mail address..." />
-          </Form.Item>
-          <Form.Item label="Title" name="title">
-            <Input placeholder="E.g., student, intern, engineer etc." />
-          </Form.Item>
-          <Form.Item label="Password" name="password">
-            <Input.Password placeholder="Your password..." />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Log in
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
-    </>
+            <UserNameSpan>{user.userName}</UserNameSpan>
+          </Dropdown.Button>
+        </LoggedInUserContainer>
+      ) : (
+        <LoginModal />
+      )}
+      {shouldOpenEditModal && (
+        <EditUserInfoModal
+          setShouldShowEditModal={() => setShouldOpenEditModal(true)}
+        />
+      )}
+    </React.Fragment>
   );
 };
 

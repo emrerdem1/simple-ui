@@ -1,6 +1,12 @@
 import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { AuthenticationState, Language, ThemeColor, ThemeState } from './types';
+import {
+  AuthenticationState,
+  Language,
+  ThemeColor,
+  ThemeState,
+  User,
+} from './types';
 
 const initialStateLogin: AuthenticationState = {
   user: null,
@@ -9,7 +15,15 @@ const initialStateLogin: AuthenticationState = {
 const loginSlice = createSlice({
   name: 'auth',
   initialState: initialStateLogin,
-  reducers: {},
+  reducers: {
+    login: (state: AuthenticationState, action: PayloadAction<User>) => {
+      state = { ...initialStateLogin, user: action.payload };
+      return state;
+    },
+    logout: () => {
+      return initialStateLogin;
+    },
+  },
 });
 
 const initialStateTheme: ThemeState = {
@@ -24,10 +38,12 @@ const themeSlice = createSlice({
 });
 
 export const { actions: loginActions, reducer: loginReducer } = loginSlice;
-export const authentication = (state: RootState) => state.loginSlice;
+export const { login, logout } = loginActions;
+export const authentication = (state: RootState): AuthenticationState =>
+  state.loginSlice;
 
 export const { actions: themeActions, reducer: themeReducer } = themeSlice;
-export const theme = (state: RootState) => state.themeSlice;
+export const theme = (state: RootState): ThemeState => state.themeSlice;
 
 const rootReducer = combineReducers({
   loginSlice: loginReducer,
