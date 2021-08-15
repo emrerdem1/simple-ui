@@ -65,5 +65,15 @@
       "mainTitle": "Simple people who are fond of simplicity itself",
       "mainDescription": "The more we made our lives simple, the more room we could find for the life to fit in."
     }
+  },
+  "countryList": {
+    "tr": "Turkey",
+    "us": "United States of America",
+    "gb": "United Kingdom",
+    "de": "Germany",
+    "se": "Sweden",
+    "ke": "Kenya",
+    "br": "Brazil",
+    "zw": "Zimbabwe"
   }
 }

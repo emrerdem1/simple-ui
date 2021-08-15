@@ -65,5 +65,15 @@
       "mainTitle": "Yalınlığı fazlasıyla benimseyen yalın insanlarız",
       "mainDescription": "Hayatlarımıza yalınlığı soktukça yaşamak için kendimize belirlediğimiz alanlarımız da genişledi."
     }
+  },
+  "countryList": {
+    "tr": "Türkiye",
+    "us": "Amerika Birleşik Devletleri",
+    "gb": "İngiltere",
+    "de": "Almanya",
+    "se": "İsveç",
+    "ke": "Kenya",
+    "br": "Brezilya",
+    "zw": "Zimbabve"
   }
 }
