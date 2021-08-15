@@ -15,7 +15,7 @@ const fixAutocomplete = (): void => {
   });
 };
 
-const CountryListView: React.FC<CountryListSpec> = (props) => {
+const CountryListView: React.FC<CountryListSpec> = ({ countries }) => {
   const [searchInput, setSearchInput] = React.useState<string>('');
   const { t } = useTranslation();
 
@@ -45,7 +45,7 @@ const CountryListView: React.FC<CountryListSpec> = (props) => {
         onSearch={(value) => setSearchInput(value)}
         onFocus={fixAutocomplete}
       >
-        {props.countries.map((country) => (
+        {countries.map((country) => (
           <Select.Option key={country.id} value={country.id}>
             {country.name}
           </Select.Option>
