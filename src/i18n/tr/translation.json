@@ -28,7 +28,8 @@
       "name": "Adınızı girin...",
       "e-mail": "E-posta adresinizi girin...",
       "title": "Örnek; öğrenci, stajyer veya mühendis....",
-      "country": "Ülkenizi seçin"
+      "country": "Ülkenizi seçin",
+      "password": "Şifre giriniz..."
     },
     "requiredMessages": {
       "name": "Lütfen ad/soyad bilgisi girin.",

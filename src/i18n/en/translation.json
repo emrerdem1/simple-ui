@@ -28,7 +28,8 @@
       "name": "Your name...",
       "e-mail": "Your e-mail address...",
       "title": "E.g. student, intern or engineer etc.",
-      "country": "Select your country"
+      "country": "Select your country",
+      "password": "Your password..."
     },
     "requiredMessages": {
       "name": "Please type your name.",
