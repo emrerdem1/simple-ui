@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { MOBILE_BREAKPOINT } from '../common/constants';
+import { Breakpoints } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
 const LinksContainer = styled.div`
@@ -23,7 +23,7 @@ const LinksContainer = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${MOBILE_BREAKPOINT}px) {
+  @media only screen and (max-width: ${Breakpoints.TABLET}px) {
     color: black;
     flex-direction: column;
     row-gap: 1em;

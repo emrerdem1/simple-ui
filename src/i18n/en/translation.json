@@ -56,16 +56,14 @@
   },
   "pagesContent": {
     "homepage": {
-      "mainTitle": "bla",
-      "mainDescription": "bla",
-      "subtitle": "blabla",
-      "description": "desc"
+      "mainTitle": "Welcome to The Simple UI!",
+      "mainDescription": "“Life is not complex. We are complex. Life is simple, and the simple thing is the right thing.” — Oscar Wilde",
+      "subtitle": "The Simplicity of Your Life is Defined By Your Needs",
+      "description": "The simplicity of your life is defined by your needs. The fewer needs you have, the more simple your life is. I like this definition of simple living because it accommodates the reality that people live different lifestyles, and how they adapt them to be simple is open for personal interpretation."
     },
     "about": {
-      "mainTitle": "bla",
-      "mainDescription": "bla",
-      "subtitle": "blabla",
-      "description": "desc"
+      "mainTitle": "Simple people who are fond of simplicity itself",
+      "mainDescription": "The more we made our lives simple, the more room we could find for the life to fit in."
     }
   }
 }

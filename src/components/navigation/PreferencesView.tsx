@@ -5,7 +5,7 @@ import LoginView from './LoginView';
 import LinksView from './LinksView';
 import { Divider } from 'antd';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
-import { MOBILE_BREAKPOINT } from '../common/constants';
+import { Breakpoints } from '../common/constants';
 
 interface MobileCollapseProps {
   isVisibleOnMobile: boolean;
@@ -28,7 +28,7 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
     background-color: #ecf0f1;
   }
 
-  @media only screen and (max-width: ${MOBILE_BREAKPOINT}px) {
+  @media only screen and (max-width: ${Breakpoints.TABLET}px) {
     display: ${(props) => (!props.isVisibleOnMobile ? 'none' : 'flex')};
     position: absolute;
     z-index: 1;
@@ -60,7 +60,7 @@ const MobileCollapseItem = styled.div`
   margin-right: 0.5em;
   cursor: pointer;
 
-  @media only screen and (min-width: ${MOBILE_BREAKPOINT}px) {
+  @media only screen and (min-width: ${Breakpoints.TABLET}px) {
     display: none;
   }
 `;
@@ -77,7 +77,7 @@ const PreferencesView: React.FC = () => {
    */
   React.useEffect(() => {
     const updateCollapseByResize = () => {
-      if (window.innerWidth <= MOBILE_BREAKPOINT || !isMobileMenuShown) {
+      if (window.innerWidth <= Breakpoints.TABLET || !isMobileMenuShown) {
         return;
       }
       setIsMobileMenuShown(false);

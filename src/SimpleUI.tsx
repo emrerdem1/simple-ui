@@ -10,10 +10,6 @@ const LayoutContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-
-  > div {
-    width: 100%;
-  }
 `;
 
 const SimpleUI: React.FC = () => {

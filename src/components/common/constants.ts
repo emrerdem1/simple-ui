@@ -3,7 +3,10 @@ export enum PageRoutes {
   ABOUT = '/about',
   CONTACT = '/contact',
 }
-export const MOBILE_BREAKPOINT = 768;
+export enum Breakpoints {
+  TABLET = 768,
+  MOBILE = 576,
+}
 
 export const COUNTRY_LIST = [
   { id: 'TR', name: 'Turkey' },
