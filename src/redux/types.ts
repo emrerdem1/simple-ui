@@ -9,17 +9,11 @@ export interface AuthenticationState {
   user: User | null;
 }
 
-export enum ThemeColor {
-  LIGHT,
-  DARK,
-}
-
 export enum Language {
-  TR,
-  ENG,
+  TR = 'tr',
+  EN = 'en',
 }
 
-export interface ThemeState {
-  mode: ThemeColor;
-  language: Language;
+export interface LanguageState {
+  userLanguage: Language;
 }

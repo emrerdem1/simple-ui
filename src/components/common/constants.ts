@@ -15,3 +15,8 @@ export const COUNTRY_LIST = [
   { id: 'BR', name: 'Brazil' },
   { id: 'ZW', name: 'Zimbabwe' },
 ];
+
+export enum LanguageIconPaths {
+  TR = '/assets/tr-icon.svg',
+  EN = '/assets/en-icon.svg',
+}

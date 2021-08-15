@@ -1,12 +1,6 @@
 import { combineReducers, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import {
-  AuthenticationState,
-  Language,
-  ThemeColor,
-  ThemeState,
-  User,
-} from './types';
+import { AuthenticationState, Language, LanguageState, User } from './types';
 
 const initialStateLogin: AuthenticationState = {
   user: null,
@@ -30,15 +24,19 @@ const loginSlice = createSlice({
   },
 });
 
-const initialStateTheme: ThemeState = {
-  mode: ThemeColor.LIGHT,
-  language: Language.TR,
+const initialStateLanguage: LanguageState = {
+  userLanguage: Language.EN,
 };
 
-const themeSlice = createSlice({
-  name: 'theme',
-  initialState: initialStateTheme,
-  reducers: {},
+const languageSlice = createSlice({
+  name: 'language',
+  initialState: initialStateLanguage,
+  reducers: {
+    updateLanguage: (state: LanguageState, action: PayloadAction<Language>) => {
+      state = { userLanguage: action.payload };
+      return state;
+    },
+  },
 });
 
 export const { actions: loginActions, reducer: loginReducer } = loginSlice;
@@ -46,11 +44,14 @@ export const { login, logout, editUserInfo } = loginActions;
 export const authentication = (state: RootState): AuthenticationState =>
   state.loginSlice;
 
-export const { actions: themeActions, reducer: themeReducer } = themeSlice;
-export const theme = (state: RootState): ThemeState => state.themeSlice;
+export const { actions: languageActions, reducer: languageReducer } =
+  languageSlice;
+export const { updateLanguage } = languageActions;
+export const language = (state: RootState): LanguageState =>
+  state.languageSlice;
 
 const rootReducer = combineReducers({
   loginSlice: loginReducer,
-  themeSlice: themeReducer,
+  languageSlice: languageReducer,
 });
 export default rootReducer;

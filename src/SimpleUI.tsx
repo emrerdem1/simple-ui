@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import FooterView from './components/FooterView';
 import NavigationView from './components/navigation/NavigationView';
 import Pages from './components/Pages';
+import './i18n/config';
 
 const LayoutContainer = styled.div`
   display: flex;
