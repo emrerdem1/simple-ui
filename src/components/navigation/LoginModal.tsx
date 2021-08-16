@@ -11,6 +11,7 @@ import UserFormFields from './UserFormFields';
 
 const TipsText = styled.p`
   color: #7d7a7a;
+  margin-bottom: 0.8em;
 `;
 
 const LoginModal: React.FC = () => {
