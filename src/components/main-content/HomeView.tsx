@@ -22,6 +22,7 @@ export const DescriptionParagraph = styled.p`
   font-size: 1.1em;
   line-height: 1.8em;
   margin-bottom: 1.2em;
+  max-width: 900px;
 
   @media only screen and (max-width: ${Breakpoints.MOBILE}px) {
     font-size: 1em;

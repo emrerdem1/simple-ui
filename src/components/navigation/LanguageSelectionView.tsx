@@ -7,7 +7,7 @@ import { language, updateLanguage } from '../../redux/reducer';
 import { Language } from '../../redux/types';
 import i18next from 'i18next';
 import { MenuInfo } from 'rc-menu/lib/interface';
-import { LanguageIconPaths } from '../common/constants';
+import { Breakpoints, LanguageIconPaths } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
 const DropdownContainer = styled.div`
@@ -21,6 +21,11 @@ const DropdownContainer = styled.div`
 
     img {
       width: 50%;
+    }
+
+    @media only screen and (max-width: ${Breakpoints.MOBILE}px) {
+      width: 4.5em;
+      padding: 4px 8px;
     }
   }
 `;

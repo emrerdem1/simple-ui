@@ -25,7 +25,7 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
 
   .ant-divider {
     height: 30%;
-    background-color: #ecf0f1;
+    background-color: rgb(236 236 236 / 76%);
   }
 
   @media only screen and (max-width: ${Breakpoints.TABLET}px) {
@@ -39,6 +39,8 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
     flex-direction: column;
     justify-content: center;
     background: #59799a;
+    // Prevent vertical scrolling due to nav and browser address bar.
+    touch-action: none;
 
     .ant-divider {
       height: unset;

@@ -129,7 +129,6 @@ const ContactView: React.FC = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="login-form-button"
             size="large"
             block
           >

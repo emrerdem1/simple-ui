@@ -26,9 +26,10 @@ const LinksContainer = styled.div`
   @media only screen and (max-width: ${Breakpoints.TABLET}px) {
     color: black;
     flex-direction: column;
-    row-gap: 1em;
     text-align: center;
     margin-bottom: 1em;
+    font-size: 1.2em;
+    row-gap: 1.6em;
   }
 `;
 
