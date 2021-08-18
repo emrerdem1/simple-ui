@@ -40,6 +40,10 @@ const CountryListView: React.FC<CountryListSpec> = ({ countries }) => {
         placeholder={t('login.placeholders.country')}
         optionFilterProp="children"
         filterOption={(input, option) =>
+          // Allows searches by country names.
+          option?.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
+            0 ||
+          // Allows searches by country codes.
           option?.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
         onSearch={(value) => setSearchInput(value)}

@@ -126,12 +126,7 @@ const ContactView: React.FC = () => {
         </Form.Item>
         <CountryListView countries={COUNTRY_LIST} />
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            size="large"
-            block
-          >
+          <Button type="primary" htmlType="submit" size="large" block>
             {t('login.buttons.send')}
           </Button>
         </Form.Item>
