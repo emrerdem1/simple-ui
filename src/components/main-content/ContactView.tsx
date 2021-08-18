@@ -102,7 +102,7 @@ const ContactView: React.FC = () => {
         }}
         onFinish={sendContactForm}
       >
-        <UserFormFields isPasswordIncluded={false} />
+        <UserFormFields />
         <Form.Item
           name="userPhone"
           label={t('login.userPhone')}

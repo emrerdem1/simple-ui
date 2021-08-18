@@ -45,7 +45,7 @@ const LoginModal: React.FC = () => {
           requiredMark={true}
           onFinish={handleLogin}
         >
-          <UserFormFields isPasswordIncluded={true} />
+          <UserFormFields isPasswordIncluded />
           <Form.Item>
             <Button
               type="primary"

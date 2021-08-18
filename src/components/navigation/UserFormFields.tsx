@@ -2,10 +2,10 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-// Password field does not exist in same usages,
-// use a param to decide whether include it or not.
+// Password field does not exist in some forms,
+// use an optional param to include it.
 interface UserFormFieldsProps {
-  isPasswordIncluded: boolean;
+  isPasswordIncluded?: boolean;
 }
 
 // Both login and edit user info modals use the same fields.

@@ -52,7 +52,7 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
           password: user?.password,
         }}
       >
-        <UserFormFields isPasswordIncluded={true} />
+        <UserFormFields isPasswordIncluded />
       </Form>
     </Modal>
   );
