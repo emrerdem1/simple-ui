@@ -43,7 +43,6 @@ const LanguageSelectionView: React.FC = () => {
   const { t } = useTranslation();
 
   const updateLanguageSelection = ({ key }: MenuInfo) => {
-    console.log('im clicked');
     const selectedLanguage = key as Language;
     i18next.changeLanguage(selectedLanguage);
     dispatch(updateLanguage(selectedLanguage));
