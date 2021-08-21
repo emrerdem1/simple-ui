@@ -53,9 +53,9 @@ const LanguageSelectionView: React.FC<LanguageProps> = ({ specificColor }) => {
   const languageMenuList = (
     <Menu
       style={{ marginTop: '-4px', padding: '2px' }}
-      selectable={true}
-      defaultSelectedKeys={[Language.EN]}
+      selectedKeys={[i18next.language]}
       onClick={updateLanguageSelection}
+      selectable
     >
       <Menu.Item key={Language.TR}>
         {t('navigation.languageTexts.tr')}

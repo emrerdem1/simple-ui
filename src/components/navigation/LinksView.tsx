@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { Breakpoints } from '../common/constants';
+import { Breakpoints, PageRoutes } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
 const LinksContainer = styled.div`
@@ -37,11 +37,11 @@ const LinksView: React.FC = () => {
   const { t } = useTranslation();
   return (
     <LinksContainer>
-      <NavLink to="/" exact>
+      <NavLink to={PageRoutes.HOME} exact>
         {t('navigation.pages.home')}
       </NavLink>
-      <NavLink to="/about">{t('navigation.pages.about')}</NavLink>
-      <NavLink to="/contact">{t('navigation.pages.contact')}</NavLink>
+      <NavLink to={PageRoutes.ABOUT}>{t('navigation.pages.about')}</NavLink>
+      <NavLink to={PageRoutes.CONTACT}>{t('navigation.pages.contact')}</NavLink>
     </LinksContainer>
   );
 };

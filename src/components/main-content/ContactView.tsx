@@ -42,7 +42,7 @@ const ContactContainer = styled.div`
     width: 80%;
     max-width: 800px;
 
-    #userMessage {
+    #message {
       min-height: 80px;
       max-height: 140px;
     }
@@ -142,11 +142,6 @@ const ContactView: React.FC = () => {
         layout="vertical"
         requiredMark={true}
         id="contactForm"
-        initialValues={{
-          name: user?.name,
-          email: user?.email,
-          title: user?.title,
-        }}
         onFinish={sendContactForm}
       >
         <UserFormFields />
