@@ -28,7 +28,6 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
   return (
     <Modal
       title={t('login.editModal')}
-      visible={true}
       onCancel={shouldShowEditModal}
       footer={[
         <Button key="back" onClick={shouldShowEditModal}>
@@ -38,19 +37,20 @@ const EditUserInfoModal: React.FC<EditUserInfoModalProps> = ({
           {t('login.buttons.save')}
         </Button>,
       ]}
+      visible
     >
       <Form
         form={form}
         layout="vertical"
-        requiredMark={true}
         id="editForm"
         onFinish={updateUserInfo}
         initialValues={{
-          userName: user?.userName,
+          name: user?.name,
           email: user?.email,
           title: user?.title,
           password: user?.password,
         }}
+        requiredMark
       >
         <UserFormFields isPasswordIncluded />
       </Form>

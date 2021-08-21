@@ -54,7 +54,7 @@ const LoginView: React.FC = () => {
         onClick={() => setShouldOpenEditModal(true)}
         trigger={['click']}
       >
-        <UserNameSpan>{user.userName}</UserNameSpan>
+        <UserNameSpan>{user.name}</UserNameSpan>
       </Dropdown.Button>
     );
   }

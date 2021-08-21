@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Button, Form, Input, InputNumber, message } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { authentication } from '../../redux/reducer';
-import { User } from '../../redux/types';
 import CountryListView from './CountryListView';
-import UserFormFields from '../navigation/UserFormFields';
+import UserFormFields, {
+  getRequiredMessage,
+  RequiredFieldsTranslationSpec,
+} from '../navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
 import { language } from '../../redux/reducer';
 
-interface ContactFormSpec extends User {
-  userCountry: string;
-  userPhone: number;
+// Names given to Form.Item elements to access their key-value pairs.
+export enum FormFields {
+  TITLE = 'title',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  NAME = 'name',
+  PHONE = 'phone',
+  COUNTRY = 'country',
+  MESSAGE = 'message',
 }
 
 interface CountryItemSpec {
@@ -47,7 +55,8 @@ const ContactView: React.FC = () => {
   const { t } = useTranslation();
   const { userLanguage } = useAppSelector(language);
 
-  React.useEffect(() => {
+  // Clear the form fields when user is logged out.
+  useEffect(() => {
     if (!user) {
       form.resetFields();
       return;
@@ -55,9 +64,47 @@ const ContactView: React.FC = () => {
     form.setFieldsValue(user);
   }, [user]);
 
+  // rc-form-field does not update required field messages
+  // when the language is changed by default. That's why
+  // we need to listen to the errors and update them manually here.
+  useEffect(() => {
+    const updateRequiredMessages = (fieldName: FormFields[]) =>
+      form.setFields([
+        {
+          name: fieldName[0],
+          errors: [
+            t(getRequiredMessage(RequiredFieldsTranslationSpec[fieldName[0]])),
+          ],
+        },
+      ]);
+    // Find all fields that have error other than email.
+    // Email has two different requirement rules, handle separately.
+    form
+      .getFieldsError()
+      .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
+      .map((er) => updateRequiredMessages(er.name as FormFields[]));
+
+    if (!form.getFieldError(FormFields.EMAIL).length) {
+      return;
+    }
+    // Email has some inputs, yet validation is failed. It means invalid email.
+    if (form.getFieldValue(FormFields.EMAIL)) {
+      return form.setFields([
+        {
+          name: FormFields.EMAIL,
+          errors: [
+            t(getRequiredMessage(RequiredFieldsTranslationSpec.invalidMail)),
+          ],
+        },
+      ]);
+    }
+    // User left the input empty, show the related error message.
+    updateRequiredMessages([FormFields.EMAIL]);
+  }, [userLanguage]);
+
   // In case user changed the language after selecting one of the countries,
   // we should check the ID and update the corresponding country name.
-  React.useEffect(() => {
+  useEffect(() => {
     const activeCountrySelection = form.getFieldsValue().userCountry;
     if (!activeCountrySelection) {
       return;
@@ -82,7 +129,7 @@ const ContactView: React.FC = () => {
     { id: 'ZW', name: t('countryList.zw') },
   ];
 
-  const sendContactForm = (formFields: ContactFormSpec) => {
+  const sendContactForm = (formFields: FormFields) => {
     console.table(formFields);
     message.info(t('login.messages.info'));
     form.resetFields();
@@ -96,7 +143,7 @@ const ContactView: React.FC = () => {
         requiredMark={true}
         id="contactForm"
         initialValues={{
-          userName: user?.userName,
+          name: user?.name,
           email: user?.email,
           title: user?.title,
         }}
@@ -104,21 +151,32 @@ const ContactView: React.FC = () => {
       >
         <UserFormFields />
         <Form.Item
-          name="userPhone"
+          name={FormFields.PHONE}
           label={t('login.userPhone')}
           rules={[
-            { required: true, message: t('login.requiredMessages.phone') },
+            {
+              required: true,
+              message: t(
+                getRequiredMessage(
+                  RequiredFieldsTranslationSpec[FormFields.PHONE],
+                ),
+              ),
+            },
           ]}
         >
           <InputNumber style={{ width: '100%' }} maxLength={15} />
         </Form.Item>
         <Form.Item
-          name="userMessage"
+          name={FormFields.MESSAGE}
           label={t('login.userMessage')}
           rules={[
             {
               required: true,
-              message: t('login.requiredMessages.message'),
+              message: t(
+                getRequiredMessage(
+                  RequiredFieldsTranslationSpec[FormFields.MESSAGE],
+                ),
+              ),
             },
           ]}
         >

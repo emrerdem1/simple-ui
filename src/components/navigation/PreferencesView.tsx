@@ -62,7 +62,6 @@ const MobileCollapseItem = styled.div`
   padding: 0.2em 0.4em;
   margin-right: 0.5em;
   cursor: pointer;
-  transition: all 2s ease-in-out;
 
   @media only screen and (min-width: ${Breakpoints.TABLET}px) {
     display: none;

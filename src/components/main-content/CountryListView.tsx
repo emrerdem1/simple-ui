@@ -2,7 +2,11 @@ import { Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CountryListSpec } from './ContactView';
+import {
+  getRequiredMessage,
+  RequiredFieldsTranslationSpec,
+} from '../navigation/UserFormFields';
+import { CountryListSpec, FormFields } from './ContactView';
 
 /*
  * Some browsers override Antd inputs' autoComplete="off" option.
@@ -25,12 +29,16 @@ const CountryListView: React.FC<CountryListSpec> = ({ countries }) => {
 
   return (
     <FormItem
-      name="userCountry"
+      name={FormFields.COUNTRY}
       label={t('login.userCountry')}
       rules={[
         {
           required: true,
-          message: t('login.requiredMessages.country'),
+          message: t(
+            getRequiredMessage(
+              RequiredFieldsTranslationSpec[FormFields.COUNTRY],
+            ),
+          ),
         },
       ]}
     >

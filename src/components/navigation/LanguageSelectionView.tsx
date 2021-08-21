@@ -10,7 +10,11 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 import { Breakpoints, LanguageIconPaths } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
-const DropdownContainer = styled.div`
+interface LanguageProps {
+  specificColor?: string;
+}
+
+const DropdownContainer = styled.div<LanguageProps>`
   .ant-dropdown-trigger {
     // Increase click trigger area for mobile.
     padding: 0.8em;
@@ -18,7 +22,7 @@ const DropdownContainer = styled.div`
     align-items: center;
     justify-content: center;
     column-gap: 0.4em;
-    color: white;
+    color: ${(props) => props.color ?? 'white'};
 
     img {
       width: 1.5em;
@@ -35,7 +39,7 @@ const DropdownContainer = styled.div`
   }
 `;
 
-const LanguageSelectionView: React.FC = () => {
+const LanguageSelectionView: React.FC<LanguageProps> = ({ specificColor }) => {
   const { userLanguage } = useAppSelector(language);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -63,7 +67,7 @@ const LanguageSelectionView: React.FC = () => {
   );
 
   return (
-    <DropdownContainer>
+    <DropdownContainer color={specificColor}>
       <Dropdown
         overlay={languageMenuList}
         placement="bottomCenter"

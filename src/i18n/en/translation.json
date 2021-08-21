@@ -18,7 +18,7 @@
     "loginInfo": "This is just a pseudo-login, you do not need to sign-in or give an actual info to login. Please just fill the necessary fields.",
     "editModal": "Edit Your Profile Information",
     "userName": "Name",
-    "userEmail": "E-mail",
+    "userEmail": "Email",
     "userTitle": "Title",
     "userPassword": "Password",
     "userPhone": "Phone Number",
@@ -26,15 +26,15 @@
     "userCountry": "Your country",
     "placeholders": {
       "name": "Your name...",
-      "e-mail": "Your e-mail address...",
+      "email": "Your email address...",
       "title": "E.g. student, intern or engineer etc.",
       "country": "Select your country",
       "password": "Your password..."
     },
     "requiredMessages": {
       "name": "Please type your name.",
-      "e-mail": "Please input your E-mail!",
-      "invalidMail": "E-mail address is not valid!",
+      "email": "Please input your Email!",
+      "invalidMail": "Email address is not valid!",
       "phone": "Please input your phone number!",
       "message": "Please let us know how can we help you.",
       "country": "Please select a country."

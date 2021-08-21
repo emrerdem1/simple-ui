@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, message } from 'antd';
+import { Button, message, Row } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Form } from 'antd';
 import { User } from '../../redux/types';
@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import { login } from '../../redux/reducer';
 import { useTranslation } from 'react-i18next';
 import UserFormFields from './UserFormFields';
+import LanguageSelectionView from './LanguageSelectionView';
 
 const TipsText = styled.p`
   color: #7d7a7a;
@@ -46,14 +47,17 @@ const LoginModal: React.FC = () => {
           onFinish={handleLogin}
         >
           <UserFormFields isPasswordIncluded />
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              {t('login.buttons.login')}
-            </Button>
+          <Form.Item className="login-row">
+            <Row justify="space-between" align="middle">
+              <LanguageSelectionView specificColor="black" />
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                {t('login.buttons.login')}
+              </Button>
+            </Row>
           </Form.Item>
         </Form>
       </Modal>
