@@ -11,11 +11,9 @@ import { Breakpoints, LanguageIconPaths } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
 const DropdownContainer = styled.div`
-  // Increase click trigger area for mobile.
-  padding: 0.8em;
-
   .ant-dropdown-trigger {
-    width: 3em;
+    // Increase click trigger area for mobile.
+    padding: 0.8em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +21,7 @@ const DropdownContainer = styled.div`
     color: white;
 
     img {
-      width: 50%;
+      width: 1.5em;
     }
 
     span {
@@ -50,7 +48,7 @@ const LanguageSelectionView: React.FC = () => {
 
   const languageMenuList = (
     <Menu
-      style={{ marginTop: '2px', padding: '2px' }}
+      style={{ marginTop: '-4px', padding: '2px' }}
       selectable={true}
       defaultSelectedKeys={[Language.EN]}
       onClick={updateLanguageSelection}
