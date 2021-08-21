@@ -11,6 +11,9 @@ import { Breakpoints, LanguageIconPaths } from '../common/constants';
 import { useTranslation } from 'react-i18next';
 
 const DropdownContainer = styled.div`
+  // Increase click trigger area for mobile.
+  padding: 0.8em;
+
   .ant-dropdown-trigger {
     width: 3em;
     display: flex;
@@ -21,6 +24,10 @@ const DropdownContainer = styled.div`
 
     img {
       width: 50%;
+    }
+
+    span {
+      padding-left: 0.2em;
     }
 
     @media only screen and (max-width: ${Breakpoints.MOBILE}px) {
@@ -36,6 +43,7 @@ const LanguageSelectionView: React.FC = () => {
   const { t } = useTranslation();
 
   const updateLanguageSelection = ({ key }: MenuInfo) => {
+    console.log('im clicked');
     const selectedLanguage = key as Language;
     i18next.changeLanguage(selectedLanguage);
     dispatch(updateLanguage(selectedLanguage));
@@ -59,7 +67,11 @@ const LanguageSelectionView: React.FC = () => {
 
   return (
     <DropdownContainer>
-      <Dropdown overlay={languageMenuList} placement="bottomCenter">
+      <Dropdown
+        overlay={languageMenuList}
+        placement="bottomCenter"
+        trigger={['click']}
+      >
         <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
           <img
             src={

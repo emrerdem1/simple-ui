@@ -50,6 +50,7 @@ const LoginView: React.FC = () => {
           placement="bottomLeft"
           icon={<UserOutlined />}
           onClick={() => setShouldOpenEditModal(true)}
+          trigger={['click']}
         >
           <UserNameSpan>{user.userName}</UserNameSpan>
         </Dropdown.Button>
