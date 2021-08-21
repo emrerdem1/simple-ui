@@ -7,9 +7,12 @@ import { Dropdown, Menu, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EditUserInfoModal from './EditUserInfoModal';
 import { useTranslation } from 'react-i18next';
+import { Breakpoints } from '../common/constants';
 
-const LoggedInUserContainer = styled.div`
-  color: white;
+const LoginViewContainer = styled.div`
+  @media only screen and (max-width: ${Breakpoints.TABLET}px) {
+    margin-top: 1em;
+  }
 `;
 
 const UserNameSpan = styled.span`
@@ -44,29 +47,27 @@ const LoginView: React.FC = () => {
   let loginItem = <LoginModal />;
   if (user) {
     loginItem = (
-      <LoggedInUserContainer>
-        <Dropdown.Button
-          overlay={loggedInUserMenu}
-          placement="bottomLeft"
-          icon={<UserOutlined />}
-          onClick={() => setShouldOpenEditModal(true)}
-          trigger={['click']}
-        >
-          <UserNameSpan>{user.userName}</UserNameSpan>
-        </Dropdown.Button>
-      </LoggedInUserContainer>
+      <Dropdown.Button
+        overlay={loggedInUserMenu}
+        placement="bottomLeft"
+        icon={<UserOutlined />}
+        onClick={() => setShouldOpenEditModal(true)}
+        trigger={['click']}
+      >
+        <UserNameSpan>{user.userName}</UserNameSpan>
+      </Dropdown.Button>
     );
   }
 
   return (
-    <React.Fragment>
+    <LoginViewContainer>
       {loginItem}
       {shouldOpenEditModal && (
         <EditUserInfoModal
           shouldShowEditModal={() => setShouldOpenEditModal(false)}
         />
       )}
-    </React.Fragment>
+    </LoginViewContainer>
   );
 };
 

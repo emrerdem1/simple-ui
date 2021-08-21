@@ -42,10 +42,11 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
     // Prevent vertical scrolling due to nav and browser address bar.
     touch-action: none;
 
-    .ant-divider {
+    .ant-divider-horizontal {
       height: unset;
       width: 50%;
       min-width: auto;
+      margin: 1em 0;
     }
   }
 `;
@@ -61,6 +62,7 @@ const MobileCollapseItem = styled.div`
   padding: 0.2em 0.4em;
   margin-right: 0.5em;
   cursor: pointer;
+  transition: all 2s ease-in-out;
 
   @media only screen and (min-width: ${Breakpoints.TABLET}px) {
     display: none;
