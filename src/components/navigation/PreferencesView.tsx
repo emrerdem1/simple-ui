@@ -6,6 +6,7 @@ import LinksView from './LinksView';
 import { Divider } from 'antd';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import { Breakpoints } from '../common/constants';
+import { css, Global } from '@emotion/react';
 
 interface MobileCollapseProps {
   isVisibleOnMobile: boolean;
@@ -39,8 +40,6 @@ const PreferencesContainer = styled.div<MobileCollapseProps>`
     flex-direction: column;
     justify-content: center;
     background: #59799a;
-    // Prevent vertical scrolling due to nav and browser address bar.
-    touch-action: none;
 
     .ant-divider-horizontal {
       height: unset;
@@ -91,25 +90,46 @@ const PreferencesView: React.FC = () => {
     return () => window.removeEventListener('resize', updateCollapseByResize);
   }, [isMobileMenuShown]);
 
+  const toggleMobileMenu = () => {
+    // I did not set a fixed position for collapse icon element,
+    // so I need to force the scroll to the top in order to show sidebar at full height.
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    setIsMobileMenuShown(!isMobileMenuShown);
+  };
+
   const dividerItem = (
     <Divider type={isMobileMenuShown ? 'horizontal' : 'vertical'} />
   );
 
   return (
-    <Container>
-      <MobileCollapseItem
-        onClick={() => setIsMobileMenuShown(!isMobileMenuShown)}
-      >
-        {isMobileMenuShown ? <CloseOutlined /> : <MenuOutlined />}
-      </MobileCollapseItem>
-      <PreferencesContainer isVisibleOnMobile={isMobileMenuShown}>
-        <LinksView />
-        {dividerItem}
-        <LanguageSelectionView />
-        {dividerItem}
-        <LoginView />
-      </PreferencesContainer>
-    </Container>
+    <>
+      {isMobileMenuShown && (
+        // Prevent scrolling when the side menu is opened.
+        <Global
+          styles={css`
+            body {
+              overflow: hidden;
+              max-height: 100vh;
+            }
+          `}
+        />
+      )}
+      <Container>
+        <MobileCollapseItem onClick={toggleMobileMenu}>
+          {isMobileMenuShown ? <CloseOutlined /> : <MenuOutlined />}
+        </MobileCollapseItem>
+        <PreferencesContainer isVisibleOnMobile={isMobileMenuShown}>
+          <LinksView />
+          {dividerItem}
+          <LanguageSelectionView />
+          {dividerItem}
+          <LoginView />
+        </PreferencesContainer>
+      </Container>
+    </>
   );
 };
 

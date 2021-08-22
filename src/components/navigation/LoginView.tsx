@@ -48,11 +48,16 @@ const LoginView: React.FC = () => {
   if (user) {
     loginItem = (
       <Dropdown.Button
-        overlay={loggedInUserMenu}
-        placement="bottomLeft"
         icon={<UserOutlined />}
         onClick={() => setShouldOpenEditModal(true)}
         trigger={['click']}
+        overlay={loggedInUserMenu}
+        placement="bottomLeft"
+        overlayStyle={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: '180px',
+        }}
       >
         <UserNameSpan>{user.name}</UserNameSpan>
       </Dropdown.Button>
