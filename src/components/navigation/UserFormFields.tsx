@@ -1,31 +1,11 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { FormFields } from '../main-content/ContactView';
-
-type InvalidEmail = 'invalidMail';
-
-// The following values represent the translation keys of required fields.
-export const RequiredFieldsTranslationSpec: Record<
-  FormFields | InvalidEmail,
-  string
-> = {
-  [FormFields.NAME]: 'name',
-  [FormFields.EMAIL]: 'email',
-  [FormFields.PHONE]: 'phone',
-  [FormFields.MESSAGE]: 'message',
-  [FormFields.COUNTRY]: 'country',
-  [FormFields.TITLE]: 'title',
-  [FormFields.PASSWORD]: 'password',
-  invalidMail: 'invalidMail',
-};
-
-/*
- * All required fields has the same parent key,
- * return the inner content of i18n by the field name.
- */
-export const getRequiredMessage = (fieldName: string): string =>
-  `login.requiredMessages.${fieldName}`;
+import {
+  FormFields,
+  getRequiredMessage,
+  RequiredFieldsTranslationSpec,
+} from '../common/form-utils';
 
 // Password field does not exist in some forms,
 // use an optional param to include it.

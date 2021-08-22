@@ -4,32 +4,16 @@ import { Button, Form, Input, InputNumber, message } from 'antd';
 import { useAppSelector } from '../../redux/hooks';
 import { authentication } from '../../redux/reducer';
 import CountryListView from './CountryListView';
-import UserFormFields, {
-  getRequiredMessage,
-  RequiredFieldsTranslationSpec,
-} from '../navigation/UserFormFields';
+import UserFormFields from '../navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
 import { language } from '../../redux/reducer';
-
-// Names given to Form.Item elements to access their key-value pairs.
-export enum FormFields {
-  TITLE = 'title',
-  EMAIL = 'email',
-  PASSWORD = 'password',
-  NAME = 'name',
-  PHONE = 'phone',
-  COUNTRY = 'country',
-  MESSAGE = 'message',
-}
-
-interface CountryItemSpec {
-  id: string;
-  name: string;
-}
-
-export interface CountryListSpec {
-  countries: CountryItemSpec[];
-}
+import {
+  CountryItemSpec,
+  FormFields,
+  getRequiredMessage,
+  RequiredFieldsTranslationSpec,
+  updateRequiredMessages,
+} from '../common/form-utils';
 
 const ContactContainer = styled.div`
   display: flex;
@@ -68,38 +52,37 @@ const ContactView: React.FC = () => {
   // when the language is changed by default. That's why
   // we need to listen to the errors and update them manually here.
   useEffect(() => {
-    const updateRequiredMessages = (fieldName: FormFields[]) =>
-      form.setFields([
-        {
-          name: fieldName[0],
-          errors: [
-            t(getRequiredMessage(RequiredFieldsTranslationSpec[fieldName[0]])),
-          ],
-        },
-      ]);
     // Find all fields that have error other than email.
     // Email has two different requirement rules, handle separately.
     form
       .getFieldsError()
       .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
-      .map((er) => updateRequiredMessages(er.name as FormFields[]));
+      .map((er) =>
+        updateRequiredMessages({
+          fieldName: er.name[0] as FormFields,
+          formInstance: form,
+          i18nHook: t,
+        }),
+      );
 
     if (!form.getFieldError(FormFields.EMAIL).length) {
       return;
     }
     // Email has some inputs, yet validation is failed. It means invalid email.
     if (form.getFieldValue(FormFields.EMAIL)) {
-      return form.setFields([
-        {
-          name: FormFields.EMAIL,
-          errors: [
-            t(getRequiredMessage(RequiredFieldsTranslationSpec.invalidMail)),
-          ],
-        },
-      ]);
+      return updateRequiredMessages({
+        fieldName: FormFields.EMAIL,
+        formInstance: form,
+        i18nHook: t,
+        isInvalidFieldCheck: true,
+      });
     }
     // User left the input empty, show the related error message.
-    updateRequiredMessages([FormFields.EMAIL]);
+    updateRequiredMessages({
+      fieldName: FormFields.EMAIL,
+      formInstance: form,
+      i18nHook: t,
+    });
   }, [userLanguage]);
 
   // In case user changed the language after selecting one of the countries,

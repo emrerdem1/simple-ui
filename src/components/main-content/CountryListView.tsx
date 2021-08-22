@@ -3,10 +3,11 @@ import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  CountryItemSpec,
+  FormFields,
   getRequiredMessage,
   RequiredFieldsTranslationSpec,
-} from '../navigation/UserFormFields';
-import { CountryListSpec, FormFields } from './ContactView';
+} from '../common/form-utils';
 
 /*
  * Some browsers override Antd inputs' autoComplete="off" option.
@@ -18,6 +19,10 @@ const fixAutocomplete = (): void => {
     e.setAttribute('autocomplete', 'stopAutocomplete');
   });
 };
+
+interface CountryListSpec {
+  countries: CountryItemSpec[];
+}
 
 const CountryListView: React.FC<CountryListSpec> = ({ countries }) => {
   const [searchInput, setSearchInput] = React.useState<string>('');

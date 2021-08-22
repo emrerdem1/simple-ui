@@ -7,13 +7,10 @@ import styled from '@emotion/styled';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { login } from '../../redux/reducer';
 import { useTranslation } from 'react-i18next';
-import UserFormFields, {
-  getRequiredMessage,
-  RequiredFieldsTranslationSpec,
-} from './UserFormFields';
+import UserFormFields from './UserFormFields';
 import LanguageSelectionView from './LanguageSelectionView';
-import { FormFields } from '../main-content/ContactView';
 import { language } from '../../redux/reducer';
+import { FormFields, updateRequiredMessages } from '../common/form-utils';
 
 const TipsText = styled.p`
   color: #7d7a7a;
@@ -31,38 +28,37 @@ const LoginModal: React.FC = () => {
   // when the language is changed by default. That's why
   // we need to listen to the errors and update them manually here.
   React.useEffect(() => {
-    const updateRequiredMessages = (fieldName: FormFields[]) =>
-      form.setFields([
-        {
-          name: fieldName[0],
-          errors: [
-            t(getRequiredMessage(RequiredFieldsTranslationSpec[fieldName[0]])),
-          ],
-        },
-      ]);
     // Find all fields that have error other than email.
     // Email has two different requirement rules, handle separately.
     form
       .getFieldsError()
       .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
-      .map((er) => updateRequiredMessages(er.name as FormFields[]));
+      .map((er) =>
+        updateRequiredMessages({
+          fieldName: er.name[0] as FormFields,
+          formInstance: form,
+          i18nHook: t,
+        }),
+      );
 
     if (!form.getFieldError(FormFields.EMAIL).length) {
       return;
     }
     // Email has some inputs, yet validation is failed. It means invalid email.
     if (form.getFieldValue(FormFields.EMAIL)) {
-      return form.setFields([
-        {
-          name: FormFields.EMAIL,
-          errors: [
-            t(getRequiredMessage(RequiredFieldsTranslationSpec.invalidMail)),
-          ],
-        },
-      ]);
+      return updateRequiredMessages({
+        fieldName: FormFields.EMAIL,
+        formInstance: form,
+        i18nHook: t,
+        isInvalidFieldCheck: true,
+      });
     }
     // User left the input empty, show the related error message.
-    updateRequiredMessages([FormFields.EMAIL]);
+    updateRequiredMessages({
+      fieldName: FormFields.EMAIL,
+      formInstance: form,
+      i18nHook: t,
+    });
   }, [userLanguage]);
 
   const handleLogin = (userInfo: User) => {
