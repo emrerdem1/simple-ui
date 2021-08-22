@@ -52,13 +52,14 @@ const CountryListView: React.FC<CountryListSpec> = ({ countries }) => {
         style={{ width: 200 }}
         placeholder={t('login.placeholders.country')}
         optionFilterProp="children"
-        filterOption={(input, option) =>
+        filterOption={(input, option) => {
           // Allows searches by country names.
-          option?.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
-            0 ||
-          // Allows searches by country codes.
-          option?.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
+          // Use language specific case for Turkish letter "İ".
+          // Reference: https://stackoverflow.com/a/48637971/12579543
+          return option?.props.children
+            .toLocaleLowerCase('tr-TR')
+            .includes(input.toLocaleLowerCase('tr-TR'));
+        }}
         onSearch={(value) => setSearchInput(value)}
         onFocus={fixAutocomplete}
       >
