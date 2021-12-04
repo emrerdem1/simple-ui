@@ -13,11 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../redux/hooks';
 import { language } from '../../redux/reducer';
 
-interface PageIconAndTitleSpec {
-  icon: AntdIconProps;
-  title: string;
-}
-
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -33,6 +28,11 @@ const TitleContainer = styled.div`
 const NavTitle = styled.span`
   font-size: 1.1em;
 `;
+
+interface PageIconAndTitleSpec {
+  icon: AntdIconProps;
+  title: string;
+}
 
 const TitleView: React.FC = () => {
   const { userLanguage } = useAppSelector(language);

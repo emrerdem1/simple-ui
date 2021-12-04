@@ -8,7 +8,6 @@ import UserFormFields from '../navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
 import { language } from '../../redux/reducer';
 import {
-  CountryItemSpec,
   FormFields,
   getRequiredMessage,
   RequiredFieldsTranslationSpec,
@@ -39,8 +38,8 @@ const ContactView: React.FC = () => {
   const { t } = useTranslation();
   const { userLanguage } = useAppSelector(language);
 
-  // Clear the form fields when user is logged out.
   useEffect(() => {
+    // Clear the form fields when user is logged out.
     if (!user) {
       form.resetFields();
       return;
@@ -57,17 +56,16 @@ const ContactView: React.FC = () => {
     form
       .getFieldsError()
       .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
-      .map((er) =>
-        updateRequiredMessages({
+      .forEach((er) => {
+        console.log(er);
+        return updateRequiredMessages({
           fieldName: er.name[0] as FormFields,
           formInstance: form,
           i18nHook: t,
-        }),
-      );
+        });
+      });
 
-    if (!form.getFieldError(FormFields.EMAIL).length) {
-      return;
-    }
+    if (!form.getFieldError(FormFields.EMAIL).length) return;
     // Email has some inputs, yet validation is failed. It means invalid email.
     if (form.getFieldValue(FormFields.EMAIL)) {
       return updateRequiredMessages({
@@ -84,33 +82,6 @@ const ContactView: React.FC = () => {
       i18nHook: t,
     });
   }, [userLanguage]);
-
-  // In case user changed the language after selecting one of the countries,
-  // we should check the ID and update the corresponding country name.
-  useEffect(() => {
-    const activeCountrySelection = form.getFieldsValue().userCountry;
-    if (!activeCountrySelection) {
-      return;
-    }
-    form.setFieldsValue({
-      userCountry: COUNTRY_LIST.find(
-        (country) => country.id === activeCountrySelection,
-      )?.id,
-    });
-  }, [userLanguage]);
-
-  // TODO(emrerdem1): You should find a proper way to use i18 outside the components.
-  // A kind of static list should not be defined within the component.
-  const COUNTRY_LIST: CountryItemSpec[] = [
-    { id: 'TR', name: t('countryList.tr') },
-    { id: 'US', name: t('countryList.us') },
-    { id: 'GB', name: t('countryList.gb') },
-    { id: 'DE', name: t('countryList.de') },
-    { id: 'SE', name: t('countryList.se') },
-    { id: 'KE', name: t('countryList.ke') },
-    { id: 'BR', name: t('countryList.br') },
-    { id: 'ZW', name: t('countryList.zw') },
-  ];
 
   const sendContactForm = (formFields: FormFields) => {
     console.table(formFields);
@@ -160,7 +131,7 @@ const ContactView: React.FC = () => {
         >
           <Input.TextArea maxLength={600} />
         </Form.Item>
-        <CountryListView countries={COUNTRY_LIST} />
+        <CountryListView />
         <Form.Item>
           <Button type="primary" htmlType="submit" size="large" block>
             {t('login.buttons.send')}
