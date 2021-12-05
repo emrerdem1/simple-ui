@@ -2,12 +2,12 @@ import { Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  CountryItemSpec,
-  FormFields,
-  getRequiredMessage,
-  RequiredFieldsTranslationSpec,
-} from '../common/form-utils';
+import { FormFields } from '../common/form-utils';
+
+interface CountryItemSpec {
+  id: string;
+  name: string;
+}
 
 /*
  * Some browsers override Antd inputs' autoComplete="off" option.
@@ -64,11 +64,7 @@ const CountryListView: React.FC = () => {
       rules={[
         {
           required: true,
-          message: t(
-            getRequiredMessage(
-              RequiredFieldsTranslationSpec[FormFields.COUNTRY],
-            ),
-          ),
+          message: t('login.requiredMessages.country'),
         },
       ]}
     >
@@ -78,7 +74,7 @@ const CountryListView: React.FC = () => {
         placeholder={t('login.placeholders.country')}
         optionFilterProp="children"
         filterOption={(input, option) =>
-          searchByCountryName(input, option?.props.children)
+          searchByCountryName(input, option?.children)
         }
         onSearch={(value) => setSearchInput(value)}
         onFocus={fixAutocomplete}

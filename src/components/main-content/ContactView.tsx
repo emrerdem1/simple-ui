@@ -6,13 +6,8 @@ import { authentication } from '../../redux/reducer';
 import CountryListView from './CountryListView';
 import UserFormFields from '../navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
-import { language } from '../../redux/reducer';
-import {
-  FormFields,
-  getRequiredMessage,
-  RequiredFieldsTranslationSpec,
-  updateRequiredMessages,
-} from '../common/form-utils';
+import { FormFields } from '../common/form-utils';
+import FormErrorsTranslator from '../common/FormErrorsTranslator';
 
 const ContactContainer = styled.div`
   display: flex;
@@ -36,7 +31,6 @@ const ContactView: React.FC = () => {
   const { user } = useAppSelector(authentication);
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  const { userLanguage } = useAppSelector(language);
 
   useEffect(() => {
     // Clear the form fields when user is logged out.
@@ -47,42 +41,6 @@ const ContactView: React.FC = () => {
     form.setFieldsValue(user);
   }, [user]);
 
-  // rc-form-field does not update required field messages
-  // when the language is changed by default. That's why
-  // we need to listen to the errors and update them manually here.
-  useEffect(() => {
-    // Find all fields that have error other than email.
-    // Email has two different requirement rules, handle separately.
-    form
-      .getFieldsError()
-      .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
-      .forEach((er) => {
-        console.log(er);
-        return updateRequiredMessages({
-          fieldName: er.name[0] as FormFields,
-          formInstance: form,
-          i18nHook: t,
-        });
-      });
-
-    if (!form.getFieldError(FormFields.EMAIL).length) return;
-    // Email has some inputs, yet validation is failed. It means invalid email.
-    if (form.getFieldValue(FormFields.EMAIL)) {
-      return updateRequiredMessages({
-        fieldName: FormFields.EMAIL,
-        formInstance: form,
-        i18nHook: t,
-        isInvalidFieldCheck: true,
-      });
-    }
-    // User left the input empty, show the related error message.
-    updateRequiredMessages({
-      fieldName: FormFields.EMAIL,
-      formInstance: form,
-      i18nHook: t,
-    });
-  }, [userLanguage]);
-
   const sendContactForm = (formFields: FormFields) => {
     console.table(formFields);
     message.info(t('login.messages.info'));
@@ -91,6 +49,7 @@ const ContactView: React.FC = () => {
 
   return (
     <ContactContainer>
+      <FormErrorsTranslator formInstance={form} parentTranslationKey="login" />
       <Form
         form={form}
         layout="vertical"
@@ -105,11 +64,7 @@ const ContactView: React.FC = () => {
           rules={[
             {
               required: true,
-              message: t(
-                getRequiredMessage(
-                  RequiredFieldsTranslationSpec[FormFields.PHONE],
-                ),
-              ),
+              message: t('login.requiredMessages.phone'),
             },
           ]}
         >
@@ -121,11 +76,7 @@ const ContactView: React.FC = () => {
           rules={[
             {
               required: true,
-              message: t(
-                getRequiredMessage(
-                  RequiredFieldsTranslationSpec[FormFields.MESSAGE],
-                ),
-              ),
+              message: t('login.requiredMessages.message'),
             },
           ]}
         >

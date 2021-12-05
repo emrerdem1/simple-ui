@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import UserFormFields from './UserFormFields';
 import LanguageSelectionView from './LanguageSelectionView';
 import { language } from '../../redux/reducer';
-import { FormFields, updateRequiredMessages } from '../common/form-utils';
+import { localizeFormErrors } from '../common/form-utils';
 
 const TipsText = styled.p`
   color: #7d7a7a;
@@ -24,40 +24,11 @@ const LoginModal: React.FC = () => {
   const { t } = useTranslation();
   const { userLanguage } = useAppSelector(language);
 
-  // rc-form-field does not update required field messages
-  // when the language is changed by default. That's why
-  // we need to listen to the errors and update them manually here.
   React.useEffect(() => {
-    // Find all fields that have error other than email.
-    // Email has two different requirement rules, handle separately.
-    form
-      .getFieldsError()
-      .filter((er) => er.errors.length && er.name[0] != FormFields.EMAIL)
-      .map((er) =>
-        updateRequiredMessages({
-          fieldName: er.name[0] as FormFields,
-          formInstance: form,
-          i18nHook: t,
-        }),
-      );
-
-    if (!form.getFieldError(FormFields.EMAIL).length) {
-      return;
-    }
-    // Email has some inputs, yet validation is failed. It means invalid email.
-    if (form.getFieldValue(FormFields.EMAIL)) {
-      return updateRequiredMessages({
-        fieldName: FormFields.EMAIL,
-        formInstance: form,
-        i18nHook: t,
-        isInvalidFieldCheck: true,
-      });
-    }
-    // User left the input empty, show the related error message.
-    updateRequiredMessages({
-      fieldName: FormFields.EMAIL,
+    localizeFormErrors({
       formInstance: form,
       i18nHook: t,
+      parentTranslationKey: 'login',
     });
   }, [userLanguage]);
 

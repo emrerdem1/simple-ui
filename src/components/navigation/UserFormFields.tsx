@@ -1,11 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import {
-  FormFields,
-  getRequiredMessage,
-  RequiredFieldsTranslationSpec,
-} from '../common/form-utils';
+import { FormFields } from '../common/form-utils';
 
 // Password field does not exist in some forms,
 // use an optional param to include it.
@@ -28,11 +24,7 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({
         rules={[
           {
             required: true,
-            message: t(
-              getRequiredMessage(
-                RequiredFieldsTranslationSpec[FormFields.NAME],
-              ),
-            ),
+            message: t('login.requiredMessages.name'),
           },
         ]}
         shouldUpdate
@@ -46,17 +38,11 @@ const UserFormFields: React.FC<UserFormFieldsProps> = ({
         rules={[
           {
             type: 'email',
-            message: t(
-              getRequiredMessage(RequiredFieldsTranslationSpec.invalidMail),
-            ),
+            message: t('login.invalidMessages.email'),
           },
           {
             required: true,
-            message: t(
-              getRequiredMessage(
-                RequiredFieldsTranslationSpec[FormFields.EMAIL],
-              ),
-            ),
+            message: t('login.requiredMessages.email'),
           },
         ]}
       >

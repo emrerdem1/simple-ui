@@ -34,10 +34,12 @@
     "requiredMessages": {
       "name": "Lütfen ad/soyad bilgisi girin.",
       "email": "Lütfen e-postanızı girin.",
-      "invalidMail": "Geçerli bir e-posta girmediniz.",
       "phone": "Lütfen telefon numaranızı girin.",
       "message": "Size nasıl yardımcı olabileceğimizi anlatın lütfen.",
       "country": "Lütfen bir ülke seçin."
+    },
+    "invalidMessages": {
+      "email": "Geçerli bir e-posta girmediniz."
     },
     "buttons": {
       "login": "Giriş",
