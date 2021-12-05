@@ -2,7 +2,7 @@ import { Select } from 'antd';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormFields } from '../common/form-utils';
+import { FormFields } from 'src/components/common/form-utils';
 
 interface CountryItemSpec {
   id: string;

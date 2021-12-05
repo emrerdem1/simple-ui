@@ -7,11 +7,11 @@ import {
   InfoCircleOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import { PageRoutes } from '../common/constants';
+import { PageRoutes } from 'src/components/common/constants';
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../../redux/hooks';
-import { language } from '../../redux/reducer';
+import { useAppSelector } from 'src/redux/hooks';
+import { language } from 'src/redux/reducer';
 
 const TitleContainer = styled.div`
   display: flex;

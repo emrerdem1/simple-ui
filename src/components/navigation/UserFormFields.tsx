@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { FormFields } from '../common/form-utils';
+import { FormFields } from 'src/components/common/form-utils';
 
 // Password field does not exist in some forms,
 // use an optional param to include it.

@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { FormInstance } from 'antd';
 import { FormFields, updateFieldError } from './form-utils';
 import { useTranslation } from 'react-i18next';
-import { language } from '../../redux/reducer';
-import { useAppSelector } from '../../redux/hooks';
+import { language } from 'src/redux/reducer';
+import { useAppSelector } from 'src/redux/hooks';
 
 interface FormErrorsTranslatorProps {
   formInstance: FormInstance;

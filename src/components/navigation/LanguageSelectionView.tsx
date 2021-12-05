@@ -2,12 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { language, updateLanguage } from '../../redux/reducer';
-import { Language } from '../../redux/types';
+import { useAppSelector, useAppDispatch } from 'src/redux/hooks';
+import { language, updateLanguage } from 'src/redux/reducer';
+import { Language } from 'src/redux/types';
 import i18next from 'i18next';
 import { MenuInfo } from 'rc-menu/lib/interface';
-import { Breakpoints, LanguageIconPaths } from '../common/constants';
+import {
+  Breakpoints,
+  LanguageIconPaths,
+} from 'src/components/common/constants';
 import { useTranslation } from 'react-i18next';
 
 interface LanguageProps {

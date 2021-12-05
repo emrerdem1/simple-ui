@@ -2,15 +2,15 @@ import React from 'react';
 import { Button, message, Row } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import { Form } from 'antd';
-import { User } from '../../redux/types';
+import { User } from 'src/redux/types';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { login } from '../../redux/reducer';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { login } from 'src/redux/reducer';
 import { useTranslation } from 'react-i18next';
 import UserFormFields from './UserFormFields';
 import LanguageSelectionView from './LanguageSelectionView';
-import { language } from '../../redux/reducer';
-import { localizeFormErrors } from '../common/form-utils';
+import { language } from 'src/redux/reducer';
+import { localizeFormErrors } from 'src/components/common/form-utils';
 
 const TipsText = styled.p`
   color: #7d7a7a;

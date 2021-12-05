@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from 'antd/lib/modal/Modal';
 import { Button, Form, message } from 'antd';
-import { User } from '../../redux/types';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { editUserInfo, authentication } from '../../redux/reducer';
+import { User } from 'src/redux/types';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { editUserInfo, authentication } from 'src/redux/reducer';
 import { useTranslation } from 'react-i18next';
 import UserFormFields from './UserFormFields';
 

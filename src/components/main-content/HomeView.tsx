@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
-import { Breakpoints } from '../common/constants';
+import { Breakpoints } from 'src/components/common/constants';
 
 export const BasicContainer = styled.div`
   width: 80%;

@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { authentication, logout } from '../../redux/reducer';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { authentication, logout } from 'src/redux/reducer';
 import LoginModal from './LoginModal';
 import { Dropdown, Menu, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EditUserInfoModal from './EditUserInfoModal';
 import { useTranslation } from 'react-i18next';
-import { Breakpoints } from '../common/constants';
+import { Breakpoints } from 'src/components/common/constants';
 
 const LoginViewContainer = styled.div`
   @media only screen and (max-width: ${Breakpoints.TABLET}px) {

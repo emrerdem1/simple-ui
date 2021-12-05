@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Button, Form, Input, InputNumber, message } from 'antd';
-import { useAppSelector } from '../../redux/hooks';
-import { authentication } from '../../redux/reducer';
+import { useAppSelector } from 'src/redux/hooks';
+import { authentication } from 'src/redux/reducer';
 import CountryListView from './CountryListView';
-import UserFormFields from '../navigation/UserFormFields';
+import UserFormFields from 'src/components/navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
-import { FormFields } from '../common/form-utils';
-import FormErrorsTranslator from '../common/FormErrorsTranslator';
+import { FormFields } from 'src/components/common/form-utils';
+import FormErrorsTranslator from 'src/components/common/FormErrorsTranslator';
 
 const ContactContainer = styled.div`
   display: flex;
