@@ -10,7 +10,7 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 import {
   Breakpoints,
   LanguageIconPaths,
-} from 'src/components/common/constants';
+} from 'src/utils/constants';
 import { useTranslation } from 'react-i18next';
 
 interface LanguageProps {

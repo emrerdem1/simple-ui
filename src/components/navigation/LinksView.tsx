@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { Breakpoints, PageRoutes } from 'src/components/common/constants';
+import { Breakpoints, PageRoutes } from 'src/utils/constants';
 import { useTranslation } from 'react-i18next';
 
 const LinksContainer = styled.div`

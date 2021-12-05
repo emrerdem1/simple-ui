@@ -7,7 +7,7 @@ import { Dropdown, Menu, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import EditUserInfoModal from './EditUserInfoModal';
 import { useTranslation } from 'react-i18next';
-import { Breakpoints } from 'src/components/common/constants';
+import { Breakpoints } from 'src/utils/constants';
 
 const LoginViewContainer = styled.div`
   @media only screen and (max-width: ${Breakpoints.TABLET}px) {

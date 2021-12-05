@@ -6,7 +6,7 @@ import { authentication } from 'src/redux/reducer';
 import CountryListView from './CountryListView';
 import UserFormFields from 'src/components/navigation/UserFormFields';
 import { useTranslation } from 'react-i18next';
-import { FormFields } from 'src/components/common/form-utils';
+import { FormFields } from 'src/utils/form-utils';
 import FormErrorsTranslator from 'src/components/common/FormErrorsTranslator';
 
 const ContactContainer = styled.div`

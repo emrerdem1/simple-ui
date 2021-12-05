@@ -46,6 +46,7 @@ interface UpdateFieldErrorProps {
   parentTranslationKey: string;
   i18nHook: (key: string) => string;
 }
+
 /*
  * Update the error message of the form instance by field name.
  */
@@ -75,32 +76,4 @@ export const updateFieldError = ({
       errors: [translatedErrorMessage],
     },
   ]);
-};
-
-interface LocalizeFormProps {
-  formInstance: FormInstance;
-  i18nHook: (key: string) => string;
-  parentTranslationKey: string;
-}
-// rc-form-field does not update required field messages by default
-// when the language is changed. Needs to check the errors and update them manually.
-export const localizeFormErrors = ({
-  formInstance,
-  i18nHook,
-  parentTranslationKey,
-}: LocalizeFormProps): void => {
-  const errorFields = formInstance
-    .getFieldsError()
-    .filter((field) => field.errors.length);
-  // No error found to translate.
-  if (!errorFields.length) return;
-
-  errorFields.forEach((field) =>
-    updateFieldError({
-      fieldName: field.name[0] as FormFields,
-      formInstance,
-      i18nHook,
-      parentTranslationKey,
-    }),
-  );
 };

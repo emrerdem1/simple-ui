@@ -5,7 +5,7 @@ import LoginView from './LoginView';
 import LinksView from './LinksView';
 import { Divider } from 'antd';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
-import { Breakpoints } from 'src/components/common/constants';
+import { Breakpoints } from 'src/utils/constants';
 import { css, Global } from '@emotion/react';
 
 interface MobileCollapseProps {

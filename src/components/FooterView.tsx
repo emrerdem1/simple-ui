@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { GithubFilled, LinkedinFilled } from '@ant-design/icons';
 import { Button } from 'antd';
-import { ContactLinks } from './common/constants';
+import { ContactLinks } from '../utils/constants';
 
 const FooterContainer = styled.div`
   display: flex;

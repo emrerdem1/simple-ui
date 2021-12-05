@@ -4,13 +4,12 @@ import Modal from 'antd/lib/modal/Modal';
 import { Form } from 'antd';
 import { User } from 'src/redux/types';
 import styled from '@emotion/styled';
-import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { useAppDispatch } from 'src/redux/hooks';
 import { login } from 'src/redux/reducer';
 import { useTranslation } from 'react-i18next';
 import UserFormFields from './UserFormFields';
 import LanguageSelectionView from './LanguageSelectionView';
-import { language } from 'src/redux/reducer';
-import { localizeFormErrors } from 'src/components/common/form-utils';
+import FormErrorsTranslator from 'src/components/common/FormErrorsTranslator';
 
 const TipsText = styled.p`
   color: #7d7a7a;
@@ -22,15 +21,6 @@ const LoginModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
   const { t } = useTranslation();
-  const { userLanguage } = useAppSelector(language);
-
-  React.useEffect(() => {
-    localizeFormErrors({
-      formInstance: form,
-      i18nHook: t,
-      parentTranslationKey: 'login',
-    });
-  }, [userLanguage]);
 
   const handleLogin = (userInfo: User) => {
     dispatch(login(userInfo));
@@ -50,7 +40,10 @@ const LoginModal: React.FC = () => {
         forceRender
       >
         <TipsText>{t('login.loginInfo')}</TipsText>
-
+        <FormErrorsTranslator
+          formInstance={form}
+          parentTranslationKey="login"
+        />
         <Form
           form={form}
           layout="vertical"
